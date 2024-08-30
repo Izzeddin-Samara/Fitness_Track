@@ -71,3 +71,9 @@ def get_user(user_id):
 
 def check(request):
     return User.objects.filter(email=request.POST['email']).first()
+
+def get_coach(coach_id):
+    return Coach.objects.get(id=coach_id)
+
+def show_all_coaches(request):
+    return Coach.objects.all()
