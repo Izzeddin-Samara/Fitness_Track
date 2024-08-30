@@ -38,3 +38,13 @@ class Coach(models.Model):
     bio = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Session(models.Model):
+    coach = models.ForeignKey(Coach, related_name= "coach_sessions", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="user_sessions", on_delete=models.CASCADE)
+    date = models.DateField()
+    duration = models.CharField(max_length=50)
+    place = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
