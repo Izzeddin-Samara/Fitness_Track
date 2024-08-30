@@ -1,5 +1,6 @@
 from django.db import models
 import re
+import bcrypt
 
 class UserManager(models.Manager):
     def register_validator(self, postData, user_id=None):
@@ -54,3 +55,19 @@ class Review(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+def add_user(postData):
+    first_name = postData['first_name']
+    last_name = postData['last_name']
+    email = postData['email']
+    password = postData['password']
+    pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+    user = User.objects.create(first_name=first_name, last_name=last_name, email=email, password=pw_hash)
+    return user
+
+def get_user(user_id):
+    user = User.objects.get(id=user_id)
+    return user
+
+def check(request):
+    return User.objects.filter(email=request.POST['email']).first()
