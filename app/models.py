@@ -48,3 +48,9 @@ class Session(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class Review(models.Model):
+    coach = models.ForeignKey(Coach, related_name= "coach_reviews",  on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name= "user_reviews", on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
