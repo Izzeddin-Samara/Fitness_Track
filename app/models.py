@@ -108,4 +108,36 @@ def get_session(session_id):
 def show_all_sessions(request):
     return Session.objects.all()
 
+def add_review(request):
+    user_id = request.session['userid']
+    coach_id = request.session['coachid']
+    content = request.POST['content']
+    user = User.objects.get(id=user_id)
+    coach = Coach.objects.get(id=coach_id)
+    review = Review.objects.create(content=content, user=user, coach=coach)
+    return review
+
+def existing_review(request):
+    user_id = request.session['userid']
+    coach_id = request.session['coachid']
+    user = User.objects.get(id=user_id)
+    coach = Coach.objects.get(id=coach_id)
+    return Review.objects.filter(coach=coach, user=user).first()
+
+def update_review(request, review_id): 
+    review = Review.objects.get(id=review_id)
+    review.content = request.POST['content']
+    review.save()
+
+def delete_review(review_id):
+    review = Review.objects.get(id=review_id)
+    review.delete()
+    return review
+
+def get_review(review_id):
+    review = Review.objects.get(id=review_id)
+    return review
+
+def get_reviews_by_user(user_id):
+    return Review.objects.filter(user__id=user_id)
 
