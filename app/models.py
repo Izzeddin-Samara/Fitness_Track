@@ -77,3 +77,35 @@ def get_coach(coach_id):
 
 def show_all_coaches(request):
     return Coach.objects.all()
+
+def create_session(request):
+    user_id = request.session['userid']
+    coach_id = request.session['coachid']
+    date = request.POST['date']
+    duration = request.POST['duration']
+    place =request.POST['place']
+    user = User.objects.get(id=user_id)
+    coach = Coach.objects.get(id=coach_id)
+    session = Session.objects.create(date=date, duration=duration, user=user, coach=coach, place=place)
+    return session
+
+def update_session(request, session_id): 
+    session = Session.objects.get(id=session_id)
+    session.date = request.POST['date']
+    session.duration= request.POST['duration']
+    session.place=request.POST['place']
+    session.save()
+
+def delete_session(session_id):
+    session = Session.objects.get(id=session_id)
+    session.delete()
+    return session
+
+def get_session(session_id):
+    session = Session.objects.get(id=session_id)
+    return session
+
+def show_all_sessions(request):
+    return Session.objects.all()
+
+
