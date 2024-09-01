@@ -10,4 +10,5 @@ urlpatterns = [
      path('update_session/<int:session_id>/', views.update_session, name='update_session'),
      path('cancel_session/<int:session_id>/', views.cancel_session, name='cancel_session'),
      path('create_review/<int:coach_id>/', views.create_review, name='create_review'),
+     path('update_review/<int:review_id>/', views.update_review, name='update_review'),
 ]

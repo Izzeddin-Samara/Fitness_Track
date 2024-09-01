@@ -117,3 +117,14 @@ def create_review(request, coach_id):
         return redirect('/recent_reviews')
 
     return render(request, 'review_form.html', {'coach': coach, 'coach_id': coach_id})
+
+def update_review(request, review_id):
+    review = models.get_review(review_id)
+    coach = review.coach  
+
+    if request.method == 'POST':
+        models.update_review(request, review_id)
+        messages.success(request, f" Review for coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
+        return redirect('/recent_reviews')
+    else:
+        return render(request, 'update_review.html', {'review': review, 'coach': coach})
