@@ -37,3 +37,12 @@ def register(request):
             return render(request, 'register.html')
     else:
         return render(request, 'register.html')
+
+def user_dashboard(request):
+    if 'userid' in request.session:
+        user_id = request.session['userid']
+        user = models.get_user(user_id)
+        return render(request, 'user_dashboard.html', {
+            'user': user,
+        })
+    return redirect('/login')
