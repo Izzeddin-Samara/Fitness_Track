@@ -105,9 +105,6 @@ def get_session(session_id):
     session = Session.objects.get(id=session_id)
     return session
 
-def show_all_sessions(request):
-    return Session.objects.all()
-
 def add_review(request):
     user_id = request.session['userid']
     coach_id = request.session['coachid']
