@@ -156,3 +156,10 @@ def upcoming_sessions(request):
         user = models.get_user(user_id)
         user_sessions = models.get_sessions_by_user(user_id)
         return render(request, 'upcoming_sessions.html', {'user': user, 'user_sessions': user_sessions})
+
+def recent_reviews(request):
+    if 'userid' in request.session:
+        user_id = request.session['userid']
+        user = models.get_user(user_id)
+        user_reviews = models.get_reviews_by_user(user_id)
+        return render(request, 'recent_reviews.html', {'user': user, 'user_reviews': user_reviews})
