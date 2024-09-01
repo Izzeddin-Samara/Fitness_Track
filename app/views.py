@@ -84,3 +84,17 @@ def update_session(request, session_id):
         return redirect('/upcoming_sessions')
     else:
         return render(request, 'update_session.html', {'session': session, 'coach': coach})
+
+def cancel_session(request, session_id):
+    session = models.get_session(session_id)
+    coach = session.coach
+    models.delete_session(session_id)
+    send_mail(
+        'Session Deleted Successfully',
+        f'Your session with coach {coach.first_name} {coach.last_name} on {session.date} at {session.duration}  has been successfully cancelled.',
+        'izzidinsamara@gmail.com',
+        [session.user.email],
+        fail_silently=False,
+    )
+    messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} deleted successfully", extra_tags='danger')
+    return redirect('/upcoming_sessions')
