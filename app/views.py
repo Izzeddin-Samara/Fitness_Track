@@ -4,6 +4,7 @@ from django.contrib import messages
 import bcrypt
 from .models import User
 from django.core.mail import send_mail
+from django.contrib.auth import logout
 
 def index(request):
     all_the_coaches = models.show_all_coaches(request)
@@ -135,3 +136,7 @@ def delete_review(request, review_id):
     coach = review.coach    
     messages.success(request, f" Review for coach {coach.first_name} {coach.last_name} deleted successfully.", extra_tags='success')
     return redirect('/recent_reviews', {'review' : review, 'coach' : coach})
+
+def logout_user(request):
+    logout(request)
+    return redirect('/')
