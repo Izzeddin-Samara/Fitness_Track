@@ -138,3 +138,6 @@ def get_review(review_id):
 def get_reviews_by_user(user_id):
     return Review.objects.filter(user__id=user_id)
 
+def get_sessions_by_user(user_id):
+    return Session.objects.filter(user__id=user_id)
+
