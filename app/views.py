@@ -66,3 +66,21 @@ def create_session(request, coach_id):
 
     
     return render(request, 'session_form.html', {'coach': coach, 'coach_id': coach_id})
+
+def update_session(request, session_id):
+    session = models.get_session(session_id)
+    coach = session.coach 
+
+    if request.method == 'POST':
+        models.update_session(request, session_id)
+        send_mail(
+            'Session Updated Successfully',
+            f'Your session with coach {coach.first_name} {coach.last_name} has been updated to be on {session.date} at {session.duration} at {session.place} .',
+            'izzidinsamara@gmail.com',
+            [session.user.email],
+            fail_silently=False,
+        )
+        messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
+        return redirect('/upcoming_sessions')
+    else:
+        return render(request, 'update_session.html', {'session': session, 'coach': coach})
