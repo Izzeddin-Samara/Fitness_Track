@@ -144,7 +144,7 @@ def logout_user(request):
 def about_us(request):
     return render(request, 'about_us.html')
 
-def terms_of_use(request):
+def terms(request):
     return render(request, 'terms.html')
 
 def privacy_policy(request):
