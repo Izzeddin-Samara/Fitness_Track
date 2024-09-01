@@ -98,3 +98,22 @@ def cancel_session(request, session_id):
     )
     messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} deleted successfully", extra_tags='danger')
     return redirect('/upcoming_sessions')
+
+def create_review(request, coach_id):
+    coach = models.get_coach(coach_id)  
+
+    if request.method == 'POST':
+        request.session['coachid'] = coach_id
+        
+      
+        existing_review_instance = models.existing_review(request)
+        if existing_review_instance:
+            messages.error(request, "You have already reviewed this coach.", extra_tags='danger')
+            return redirect(f'/review/{coach_id}')
+        
+       
+        models.add_review(request)
+        messages.success(request, f"Review submitted successfully for coach {coach.first_name} {coach.last_name}", extra_tags='success')
+        return redirect('/recent_reviews')
+
+    return render(request, 'review_form.html', {'coach': coach, 'coach_id': coach_id})
