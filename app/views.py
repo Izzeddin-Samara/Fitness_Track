@@ -140,3 +140,6 @@ def delete_review(request, review_id):
 def logout_user(request):
     logout(request)
     return redirect('/')
+
+def about_us(request):
+    return render(request, 'about_us.html')
