@@ -149,3 +149,10 @@ def terms_of_use(request):
 
 def privacy_policy(request):
     return render(request, 'privacy_policy.html')
+
+def upcoming_sessions(request):
+    if 'userid' in request.session:
+        user_id = request.session['userid']
+        user = models.get_user(user_id)
+        user_sessions = models.get_sessions_by_user(user_id)
+        return render(request, 'upcoming_sessions.html', {'user': user, 'user_sessions': user_sessions})
