@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from . import models
 from django.contrib import messages
 import bcrypt
+from .models import User
 
 def index(request):
     all_the_coaches = models.show_all_coaches(request)
@@ -19,3 +20,20 @@ def login(request):
 
     
     return render(request, 'login.html')
+
+def register(request):
+    if request.method == 'POST':
+        errors = User.objects.register_validator(request.POST)
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return render(request, 'register.html')
+
+        user = models.add_user(request.POST)
+        request.session['userid'] = user.id
+        if user:
+            return redirect('/user_dashboard')
+        else:
+            return render(request, 'register.html')
+    else:
+        return render(request, 'register.html')
