@@ -18,4 +18,5 @@ urlpatterns = [
      path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
      path('upcoming_sessions/', views.upcoming_sessions, name='upcoming_sessions'),
      path('recent_reviews/', views.recent_reviews, name='recent_reviews'),
+     path('available_coaches/', views.available_coaches, name='available_coaches'),
 ]
