@@ -15,4 +15,5 @@ urlpatterns = [
      path('logout/', views.logout_user, name='logout_user'),
      path('about_us/', views.about_us, name='about_us'),
      path('terms/', views.terms_of_use, name='terms_of_use'),
+     path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
 ]
