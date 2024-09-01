@@ -3,6 +3,7 @@ from . import models
 from django.contrib import messages
 import bcrypt
 from .models import User
+from django.core.mail import send_mail
 
 def index(request):
     all_the_coaches = models.show_all_coaches(request)
@@ -46,3 +47,22 @@ def user_dashboard(request):
             'user': user,
         })
     return redirect('/login')
+
+def create_session(request, coach_id):
+    coach = models.get_coach(coach_id)
+
+    if request.method == 'POST':
+        request.session['coachid'] = coach_id
+        session = models.create_session(request)
+        send_mail(
+            'Session Created Successfully',
+            f'Your session with coach {coach.first_name} {coach.last_name} on {session.date} at {session.duration} has been successfully booked.',
+            'izzidinsamara@gmail.com',  
+            [session.user.email], 
+            fail_silently=False,
+        )
+        messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} booked successfully, session details have been sent to your email", extra_tags='success')
+        return redirect('/upcoming_sessions')
+
+    
+    return render(request, 'session_form.html', {'coach': coach, 'coach_id': coach_id})
