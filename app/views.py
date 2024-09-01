@@ -128,3 +128,10 @@ def update_review(request, review_id):
         return redirect('/recent_reviews')
     else:
         return render(request, 'update_review.html', {'review': review, 'coach': coach})
+
+def delete_review(request, review_id):
+    review = models.get_review(review_id)
+    models.delete_review(review_id)
+    coach = review.coach    
+    messages.success(request, f" Review for coach {coach.first_name} {coach.last_name} deleted successfully.", extra_tags='success')
+    return redirect('/recent_reviews', {'review' : review, 'coach' : coach})
