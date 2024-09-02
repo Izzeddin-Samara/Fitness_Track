@@ -43,10 +43,10 @@
                         <p class="card-text">{{ coach.bio }}</p>
                     </div>
                     <div class="card-footer text-center">
-                        <a href="{% url 'new_session' coach.id %}" class="btn btn-primary btn-sm">
+                        <a href="{% url 'create_session' coach.id %}" class="btn btn-primary btn-sm">
                             Book Session <i class="fas fa-calendar-plus"></i>
                         </a>
-                        <a href="{% url 'review_form' coach.id %}" class="btn btn-secondary btn-sm">
+                        <a href="{% url 'create_review' coach.id %}" class="btn btn-secondary btn-sm">
                             Leave Review <i class="fas fa-comment-alt"></i>
                         </a>
                     </div>
