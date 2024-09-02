@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
 <body>
 
     <header class="bg-dark text-white p-3 mb-4">
@@ -29,6 +31,33 @@
             </div>
         </div>
     </header>
-    
+
+    <h1 class="text-center" class="text-center font-weight-bold">Available coaches</h1>
+    <div class="card-body">
+        <div class="row">
+            {% for coach in coaches %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ coach.first_name }} {{ coach.last_name }}</h5>
+                        <p class="card-text">{{ coach.bio }}</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{% url 'new_session' coach.id %}" class="btn btn-primary btn-sm">
+                            Book Session <i class="fas fa-calendar-plus"></i>
+                        </a>
+                        <a href="{% url 'review_form' coach.id %}" class="btn btn-secondary btn-sm">
+                            Leave Review <i class="fas fa-comment-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="col">No coaches available.</p>
+            {% endfor %}
+        </div>
+    </div>
+
 </body>
+
 </html>
