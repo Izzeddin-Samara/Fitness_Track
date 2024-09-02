@@ -45,6 +45,29 @@
     </div>
     {% endif %}
 
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1>Your Upcoming Sessions</h1>
+            <a href="/available_coaches" class="btn btn-success btn-sm">Book a new session</a>
+        </div>
+        <ul class="list-group">
+            {% for session in user.user_sessions.all %}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-8">
+                        <strong>{{ session.date }} - {{ session.duration }}</strong><br>
+                        With Coach: {{ session.coach.first_name }} {{ session.coach.last_name }}
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <a href="{% url 'update_session' session.id %}" class="btn btn-success btn-sm">Update</a>
+                        <a href="{% url 'delete_session' session.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
 </body>
 
 </html>
