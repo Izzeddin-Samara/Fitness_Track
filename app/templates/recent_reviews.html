@@ -42,6 +42,26 @@
         {% endfor %}
     </div>
     {% endif %}
+
+    <div class="container">
+        <h1>Your recent Reviews</h1>
+        <ul class="list-group">
+            {% for review in user.user_reviews.all %}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-8">
+                        <strong>Review for Coach {{ review.coach.first_name }} {{ review.coach.last_name }}</strong><br>
+                        <p> {{ review.content }} ({{ review.updated_at }})</p>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <a href="{% url 'update_review' review.id %}" class="btn btn-success btn-sm">Update</a>
+                        <a href="{% url 'delete_review' review.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
     
 </body>
 </html>
