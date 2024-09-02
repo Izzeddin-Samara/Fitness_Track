@@ -67,6 +67,45 @@
         </div>
     </div>
 
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-4 d-flex align-items-stretch">
+                <div class="card text-center w-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <i class="fas fa-calendar-alt fa-2x mb-2"></i> 
+                        <h5 class="card-title">Your Upcoming Sessions</h5>
+                        <p class="card-text flex-grow-1">View and manage your upcoming sessions.</p>
+                        <a href="{% url 'upcoming_sessions' %}" class="btn btn-primary mt-2" id="orange">View Sessions</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 d-flex align-items-stretch">
+                <div class="card text-center w-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <i class="fas fa-users fa-2x mb-2"></i> 
+                        <h5 class="card-title">Available Coaches</h5>
+                        <p class="card-text flex-grow-1">Browse and book sessions with available coaches.</p>
+                        <a href="{% url 'available_coaches' %}" class="btn btn-primary mt-2" id="orange">View Coaches</a>
+                    </div>
+                </div>
+            </div>
+
+           
+            <div class="col-md-4 d-flex align-items-stretch">
+                <div class="card text-center w-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <i class="fas fa-comments fa-2x mb-2"></i> 
+                        <h5 class="card-title">Your Recent Reviews</h5>
+                        <p class="card-text flex-grow-1">View and manage your recent reviews.</p>
+                        <a href="{% url 'recent_reviews' %}" class="btn btn-primary mt-2" id="orange">View Reviews</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     
     
 </body>
