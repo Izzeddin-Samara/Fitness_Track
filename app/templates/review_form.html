@@ -56,6 +56,17 @@
             </button>
         </form>
     </div>
+
+    <section class="container mt-5">
+        <h2 class="mb-4">Recent Reviews for Coach {{ coach.first_name }} {{ coach.last_name }}</h2>
+        <ul class="list-group">
+            {% for review in coach.coach_reviews.all %}
+            <li class="list-group-item">
+                <p class="mb-1"><strong>{{ review.user.first_name }} {{ review.user.last_name }}</strong>: {{ review.content }} <small class="text-muted">({{ review.updated_at }})</small></p>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
     
 </body>
 </html>
