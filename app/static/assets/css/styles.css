@@ -317,3 +317,6 @@ h1.display-4 .custom-orange-text {
 #main-container {
     transform: translateX(-30px);
 }
+.card-title {
+    color: #ff4500;
+}
