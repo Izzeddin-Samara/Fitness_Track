@@ -42,6 +42,20 @@
         {% endfor %}
     </div>
     {% endif %}
+
+    <div class="container">
+        <h2 class="mb-4">Leave a Review for Coach {{ coach.first_name }} {{ coach.last_name }}</h2>
+        <form method="post" action="{% url 'create_review' coach_id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="content">Review:</label>
+                <textarea name="content" rows="4" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Submit Review <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
     
 </body>
 </html>
