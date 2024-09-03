@@ -5,6 +5,7 @@ import bcrypt
 from .models import User
 from django.core.mail import send_mail
 from django.contrib.auth import logout
+from datetime import date
 
 def index(request):
     all_the_coaches = models.show_all_coaches(request)
@@ -50,6 +51,7 @@ def user_dashboard(request):
     return redirect('/login')
 
 def create_session(request, coach_id):
+    min_date = date.today().isoformat()
     coach = models.get_coach(coach_id)
 
     if request.method == 'POST':
@@ -66,9 +68,10 @@ def create_session(request, coach_id):
         return redirect('/upcoming_sessions')
 
     
-    return render(request, 'session_form.html', {'coach': coach, 'coach_id': coach_id})
+    return render(request, 'session_form.html', {'coach': coach, 'coach_id': coach_id, 'min_date': min_date})
 
 def update_session(request, session_id):
+    min_date = date.today().isoformat()
     session = models.get_session(session_id)
     coach = session.coach 
 
@@ -84,7 +87,7 @@ def update_session(request, session_id):
         messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
         return redirect('/upcoming_sessions')
     else:
-        return render(request, 'update_session.html', {'session': session, 'coach': coach})
+        return render(request, 'update_session.html', {'session': session, 'coach': coach, 'min_date': min_date})
 
 def cancel_session(request, session_id):
     session = models.get_session(session_id)
