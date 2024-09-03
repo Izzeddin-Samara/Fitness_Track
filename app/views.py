@@ -97,7 +97,7 @@ def cancel_session(request, session_id):
         [session.user.email],
         fail_silently=False,
     )
-    messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} deleted successfully", extra_tags='danger')
+    messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} cancelled successfully", extra_tags='success')
     return redirect('/upcoming_sessions')
 
 def create_review(request, coach_id):
