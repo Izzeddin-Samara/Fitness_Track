@@ -113,7 +113,7 @@ def create_review(request, coach_id):
         existing_review_instance = models.existing_review(request)
         if existing_review_instance:
             messages.error(request, "You have already reviewed this coach.", extra_tags='danger')
-            return redirect(f'/review/{coach_id}')
+            return redirect(f'/create_review/{coach_id}')
         
        
         models.add_review(request)
