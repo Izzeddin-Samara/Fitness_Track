@@ -71,7 +71,9 @@
                 <div class="col-lg-10 offset-lg-1">
                     <div class="cta-content">
                         <h2>Don’t <em>think</em>, begin <em>today</em>!</h2>
-                        <p>Your journey to wellness begins here. Embrace the challenge, find your strength, and transform your life with every step. Let's achieve greatness together, one workout at a time.</p>
+                        <p>Your journey to wellness begins here. Embrace the challenge, find your strength, and
+                            transform your life with every step. Let's achieve greatness together, one workout at a
+                            time.</p>
                         <div class="main-button scroll-to-section">
                             <a href="/register">Become a member</a>
                         </div>
@@ -94,34 +96,34 @@
             <div class="container">
                 <div class="row">
                     {% for coach in all_the_coaches %}
-                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch">
-                            <div class="card w-100">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title">{{ coach.first_name }} {{ coach.last_name }}</h5>
-                                    <p class="card-text flex-grow-1">{{ coach.bio }}</p>
-                                </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch">
+                        <div class="card w-100">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ coach.first_name }} {{ coach.last_name }}</h5>
+                                <p class="card-text flex-grow-1">{{ coach.bio }}</p>
                             </div>
                         </div>
+                    </div>
                     {% endfor %}
                 </div>
-            </div>           
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
             <div class="row">
-                <div>
-                    <a href="/terms">Terms</a>
-                    <a href="/privacy_policy">Privacy Policy</a>
-                </div>
                 <div class="col-lg-12">
-                    <p>Copyright &copy; 2024 FitnessTrack</p>
+                    <p>&copy; 2024 FitnessTrack. All Rights Reserved.</p>
+                    <p>
+                        <a href="/terms" class="tm-text-link" rel="noopener noreferrer">Terms of Use</a> |
+                        <a href="/privacy_policy" class="tm-text-link" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                    </p>
                 </div>
             </div>
         </div>
     </footer>
-
+    
 
     <!-- jQuery -->
     <script src="{% static 'assets/js/jquery-2.1.0.min.js' %}"></script>
@@ -140,7 +142,7 @@
 
     <!-- Global Init -->
     <script src="{% static 'assets/js/custom.js' %}"></script>
-    
+
 
 </body>
 
