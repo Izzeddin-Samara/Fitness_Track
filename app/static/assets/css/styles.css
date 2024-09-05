@@ -320,3 +320,7 @@ h1.display-4 .custom-orange-text {
 .card-title {
     color: #ff4500;
 }
+
+#no-underline {
+    text-decoration: none;
+}
