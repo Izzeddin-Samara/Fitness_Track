@@ -42,6 +42,17 @@ class Coach(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class CoachApplication(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=15)
+    email = models.EmailField(unique=True)
+    address = models.CharField(max_length=255)
+    cv = models.FileField(upload_to='cvs/')
+    certificates = models.FileField(upload_to='certificates/')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 class Session(models.Model):
     coach = models.ForeignKey(Coach, related_name= "coach_sessions", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="user_sessions", on_delete=models.CASCADE)
