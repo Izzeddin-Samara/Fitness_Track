@@ -210,3 +210,18 @@ def available_coaches(request):
         user = models.get_user(user_id)
     coaches = models.show_all_coaches(request)
     return render(request, 'available_coaches.html', {'user': user, 'coaches': coaches})
+
+def contact(request):
+    return render(request, 'contact.html')
+
+def add_contact(request):
+    if request.method == 'POST':
+        print(request.POST)  # Check the incoming data
+        contact = models.add_contact(request)
+        if contact:
+            send_confirmation_email(contact)
+            messages.success(request, f"Your message submitted successfully!", extra_tags='success')
+            return redirect('/contact')
+        else:
+            return render(request, 'contact.html', {'error': 'Failed to create contact'})
+    return render(request, 'contact.html')

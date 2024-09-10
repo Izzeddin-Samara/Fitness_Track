@@ -24,4 +24,7 @@ urlpatterns = [
      path('upcoming_sessions/', views.upcoming_sessions, name='upcoming_sessions'),
      path('recent_reviews/', views.recent_reviews, name='recent_reviews'),
      path('available_coaches/', views.available_coaches, name='available_coaches'),
+     path('contact', views.contact, name= 'contact'),
+     path('add_contact',views.add_contact,name = 'add_contact'),
+
 ]
