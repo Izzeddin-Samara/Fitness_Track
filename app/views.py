@@ -77,6 +77,9 @@ def update_session(request, session_id):
 
     if request.method == 'POST':
         models.update_session(request, session_id)
+
+        session.refresh_from_db()
+        
         send_mail(
             'Session Updated Successfully',
             f'Your session with coach {coach.first_name} {coach.last_name} has been updated to be on {session.date} at {session.duration} at {session.place} .',
