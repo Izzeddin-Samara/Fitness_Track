@@ -11,7 +11,7 @@ def index(request):
     all_the_coaches = models.show_all_coaches(request)
     return render(request, 'home.html', {'all_the_coaches': all_the_coaches})
 
-def login(request):
+def login_user(request):
     if request.method == 'POST':
         user = models.check(request)
         if user and bcrypt.checkpw(request.POST['password'].encode(), user.password.encode()):
