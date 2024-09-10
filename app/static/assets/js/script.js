@@ -22,3 +22,13 @@ $(document).ready(function () {
     passwordField.on('input', checkPasswords);
     confirmPasswordField.on('input', checkPasswords);
 });
+
+function showForm(type) {
+    if (type === 'user') {
+        document.getElementById('user-form').classList.add('active');
+        document.getElementById('coach-form').classList.remove('active');
+    } else if (type === 'coach') {
+        document.getElementById('coach-form').classList.add('active');
+        document.getElementById('user-form').classList.remove('active');
+    }
+}
