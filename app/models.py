@@ -178,3 +178,24 @@ def add_contact(request):
     contact = Contact.objects.create(name=name,email=email,message=message)
     return contact
 
+def submit_application(postData, fileData):
+    first_name = postData['first_name']
+    last_name = postData['last_name']
+    email = postData['email']
+    address = postData['address']
+    phone_number = postData['phone_number']
+    certificates = fileData['certificates']
+    cv = fileData['cv']
+    
+    
+    application = CoachApplication.objects.create(
+        first_name=first_name,
+        last_name=last_name,
+        email=email,
+        phone_number=phone_number,
+        address=address,
+        certificates=certificates,
+        cv=cv
+    )
+    return application
+
