@@ -52,5 +52,7 @@ env/
 .idea/
 .vscode/
 
-# Ignore uploaded media files
+# Ignore uploaded media/files
 /media/
+/cvs/
+/certificates/
