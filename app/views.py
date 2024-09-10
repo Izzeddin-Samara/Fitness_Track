@@ -6,6 +6,8 @@ from .models import User
 from django.core.mail import send_mail
 from django.contrib.auth import logout
 from datetime import date
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 def index(request):
     all_the_coaches = models.show_all_coaches(request)
@@ -225,3 +227,24 @@ def add_contact(request):
         else:
             return render(request, 'contact.html', {'error': 'Failed to create contact'})
     return render(request, 'contact.html')
+
+def send_confirmation_email(contact):
+    subject = 'We Have Received Your Contact Request'
+    from_email = settings.DEFAULT_FROM_EMAIL
+    recipient_list = [contact.email]
+
+    email_body = (
+        f"Dear {contact.name},\n\n"
+        "Thank you for reaching out to us. We have received your message and our team will "
+        "get in touch with you shortly. We appreciate your patience and look forward to assisting you.\n\n"
+        "Best regards,\n"
+        "FitnessTrack Team\n"
+    )
+
+    email = EmailMessage(
+        subject=subject,
+        body=email_body,
+        from_email=from_email,
+        to=recipient_list
+    )
+    email.send()
