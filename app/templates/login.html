@@ -18,34 +18,60 @@
                 <p class="lead">Join us and start your fitness journey today</p>
             </div>
             <div class="col-md-6 bg-white p-5">
-                {% if messages %}
-                <div class="container mt-3">
-                    {% for message in messages %}
-                    {% if 'login' in message.tags %}
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                <!-- Dropdown to toggle forms -->
+                <div class="select-container">
+                    <label for="form-select" class="form-label">Select Login Type</label>
+                    <select class="custom-select" id="form-select" onchange="showForm(this.value)">
+                        <option value="user" selected>User</option>
+                        <option value="coach">Coach</option>
+                    </select>
+
+                    <!-- Display message as an inline sentence with absolute positioning -->
+                    {% if messages %}
+                    <div class="container mt-3">
+                        {% for message in messages %}
+                        {% if 'login' in message.tags %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     {% endif %}
-                    {% endfor %}
                 </div>
-                {% endif %}
-                <form class="login-form" method="post" action="{% url 'login' %}">
+
+                <!-- User Login Form -->
+                <form id="user-form" class="login-form active" method="post" action="{% url 'login_user' %}">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="Email address" required>
+                        <input type="email" class="form-control" name="email" placeholder="User Email address" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                        <input type="password" class="form-control" name="password" placeholder="User Password"
+                            required>
                     </div>
-                    <button type="submit" id="custom-orange-btn" class="btn btn-block">Log In</button>
-                    <hr>
+                    <button type="submit" id="custom-orange-btn" class="btn btn-block">Log In as User</button>
                 </form>
-                <a href="/register" id="no-underline">
-                    <button class="btn btn-secondary btn-block">Create New Account</button>
-                </a>
+
+                <!-- Coach Login Form -->
+                <form id="coach-form" class="login-form" method="post" action="{% url 'login_coach' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Coach Email address"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Coach Password"
+                            required>
+                    </div>
+                    <button type="submit" id="custom-orange-btn" class="btn btn-block">Log In as Coach</button>
+                </form>
+                <a href="/register" class="btn btn-secondary btn-block" id="no-underline">Create New Account</a>
+                <p style="margin-top: 10px; text-align: center;">Are you Coach? Submit your form <a
+                        href="/coach_application" style="color: orangered;">here</a></p>
             </div>
         </div>
     </div>
