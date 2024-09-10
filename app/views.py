@@ -77,6 +77,13 @@ def coach_sessions(request):
         coach_sessions = models.get_sessions_for_coach(coach_id)
         return render(request, 'coach_sessions.html', {'coach': coach, 'user_sessions': coach_sessions})
 
+def coach_reviews(request):
+    if 'coach_id' in request.session:
+        coach_id = request.session['coach_id']
+        coach = models.get_coach(coach_id)
+        coach_reviews = models.get_reviews_for_coach(coach_id)
+        return render(request, 'coach_reviews.html', {'coach': coach, 'user_reviews': coach_reviews})
+
 def create_session(request, coach_id):
     min_date = date.today().isoformat()
     coach = models.get_coach(coach_id)
