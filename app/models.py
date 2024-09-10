@@ -76,6 +76,16 @@ class Contact(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class Experience(models.Model):
+    coach = models.ForeignKey(Coach, related_name= "coach_experiences", on_delete=models.CASCADE)
+    job_title = models.CharField(max_length=100)
+    company_name = models.CharField(max_length=100)
+    company_address = models.CharField(max_length=100)
+    date_range = models.CharField(max_length=50)
+    description = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 
 def add_user(postData):
     first_name = postData['first_name']
