@@ -160,3 +160,10 @@ def get_sessions_for_coach(coach_id):
 def get_reviews_for_coach(coach_id):
     return Review.objects.filter(coach__id=coach_id)
 
+def add_contact(request):
+    name = request.POST['name']
+    email = request.POST['email']
+    message = request.POST['message']
+    contact = Contact.objects.create(name=name,email=email,message=message)
+    return contact
+
