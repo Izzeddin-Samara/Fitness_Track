@@ -1,0 +1,69 @@
+.login-form {
+    display: none;
+    /* Initially hide both forms */
+}
+
+.active {
+    display: block;
+    /* Show the active form */
+}
+
+.select-container {
+    text-align: center;
+    margin-bottom: 20px;
+    /* Adjust margin for spacing */
+    position: relative;
+    /* For positioning message */
+}
+
+.custom-select {
+    width: 100%;
+    /* Full width of the form */
+    padding: 10px;
+    font-size: 1rem;
+    /* Font size for the dropdown */
+    margin-bottom: 20px;
+    /* Spacing below the dropdown */
+    border: 1px solid #ccc;
+    /* Border styling */
+    border-radius: 5px;
+    /* Rounded corners */
+    line-height: 1.5;
+    /* Adjust line height to ensure text isn't cut off */
+    height: auto;
+    /* Let the browser determine the height based on content */
+}
+
+.form-label {
+    font-weight: bold;
+    text-align: left;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.message-text {
+    color: #dc3545;
+    /* Bootstrap danger color for consistency */
+    font-size: 0.9rem;
+    /* Slightly smaller font size */
+    padding: 3px 8px;
+    /* Padding for better visibility */
+    background-color: #f8d7da;
+    /* Light red background to match Bootstrap's 'danger' alert */
+    border: 1px solid #f5c6cb;
+    /* Add a border to distinguish the message */
+    border-radius: 5px;
+    /* Rounded corners */
+    position: absolute;
+    /* Position it absolutely */
+    top: 100%;
+    /* Position just below the select dropdown */
+    left: 50%;
+    /* Center it horizontally */
+    transform: translateX(-50%);
+    /* Adjust center alignment */
+    white-space: nowrap;
+    /* Prevent message from wrapping */
+    margin: 0;
+    /* Remove margin */
+}
