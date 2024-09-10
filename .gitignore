@@ -51,3 +51,6 @@ env/
 # IDEs
 .idea/
 .vscode/
+
+# Ignore uploaded media files
+/media/
