@@ -36,7 +36,9 @@ class Coach(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
+    password = models.CharField(max_length=45)
     bio = models.TextField()
+    image = models.ImageField(upload_to='media/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
