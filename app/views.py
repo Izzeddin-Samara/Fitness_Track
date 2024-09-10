@@ -61,6 +61,15 @@ def user_dashboard(request):
         })
     return redirect('/login')
 
+def coach_dashboard(request):
+    if 'coach_id' in request.session:
+        coach_id = request.session['coach_id']
+        coach = models.get_coach(coach_id)
+        return render(request, 'coach_dashboard.html', {
+            'coach': coach,
+        })
+    return redirect('/login')
+
 def create_session(request, coach_id):
     min_date = date.today().isoformat()
     coach = models.get_coach(coach_id)
