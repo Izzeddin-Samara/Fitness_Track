@@ -19,9 +19,17 @@ def login_user(request):
             return redirect('/user_dashboard')
         else:
             messages.error(request, "Invalid email or password", extra_tags='login')
+            return redirect('login')
+        
+def login_coach(request):
+    if request.method == 'POST':
+        coach = models.get_coach_by_email(request)
+        if coach and bcrypt.checkpw(request.POST['password'].encode(), coach.password.encode()):
+            request.session['coach_id'] = coach.id
+            return redirect('/coach_dashboard')
+        else:
+            messages.error(request, "Invalid email or password", extra_tags='login')
             return redirect('login') 
-
-    
     return render(request, 'login.html')
 
 def register(request):
