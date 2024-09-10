@@ -26,5 +26,6 @@ urlpatterns = [
      path('available_coaches/', views.available_coaches, name='available_coaches'),
      path('contact', views.contact, name= 'contact'),
      path('add_contact',views.add_contact,name = 'add_contact'),
+     path('coach_application', views.coach_application, name= 'coch_application'),
 
 ]

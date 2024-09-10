@@ -248,3 +248,29 @@ def send_confirmation_email(contact):
         to=recipient_list
     )
     email.send()
+
+def coach_application(request):
+    if request.method == 'POST':
+        # Call the model function with POST and FILES data
+        application = models.submit_application(request.POST, request.FILES)
+
+        # Prepare the email
+        email = EmailMessage(
+            subject='New Coach Application Received',
+            body=f"New coach application submitted by {request.POST.get('first_name')} {request.POST.get('last_name')}. Please find the attached documents.",
+            from_email=settings.DEFAULT_FROM_EMAIL,  # Ensure you have set this in your settings
+            to=['izzidinsamara@gmail.com'],  # Replace with your email
+        )
+
+        # Attach files to the email
+        for file in request.FILES.values():
+            email.attach(file.name, file.read(), file.content_type)
+
+        # Send the email
+        email.send()
+
+        # Render success template
+        return render(request, 'success.html', {'application': application})
+    else:
+        # In case of a GET request, render the application form
+        return render(request, 'coach_application.html')
