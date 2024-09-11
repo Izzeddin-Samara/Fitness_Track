@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms  
-from .models import Coach
+from .models import Coach, Experience, Education
 import bcrypt
 
 class CoachForm(forms.ModelForm):
@@ -21,3 +21,5 @@ class CoachAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 admin.site.register(Coach, CoachAdmin)
+admin.site.register(Experience)
+admin.site.register(Education)
