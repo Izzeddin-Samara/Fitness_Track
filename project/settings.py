@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -137,3 +138,62 @@ EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+
+JAZZMIN_SETTINGS = {
+    "site_title": "FitnessTrack Admin",
+    "site_header": "FITNESS TRACK", 
+    "site_brand": "FITNESS TRACK",  
+    "site_logo": "assets/media/logo.png",  
+    "login_logo": "assets/media/logo.png",  
+    "login_logo_dark": None,  
+    "site_icon": "assets/media/logo.png",  
+    "welcome_sign": "Welcome to FitnessTrack Admin",
+    "search_model": ["auth.User", "myapp.app"],
+    "user_avatar": None,
+    "topmenu_links": [
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Add", "url": "admin:auth_user_add", "permissions": ["auth.add_user"]},
+        {"model": "auth.User"},
+        {"app": "myapp"},
+    ],
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "hide_models": [],
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+    },
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+    "related_modal_active": False,
+    "custom_css": None, 
+    "custom_js": None,
+    "use_google_fonts_cdn": True,
+    "show_ui_builder": True,
+    "changeform_format": "horizontal_tabs",
+    "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
+}
+
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "united",
+    "navbar": "navbar-dark navbar-expand-lg",
+    "navbar_color": "#ed563b",
+    "navbar_fixed": True,
+    "sidebar": "sidebar-dark",
+    "sidebar_color": "#6c757d",
+    "sidebar_fixed": True,
+    "accent": "#e74c3c",
+    "link_hover_color": "#e74c3c",
+    "link_color": "#e74c3c",
+    "button_classes": {
+        "primary": "btn btn-danger",
+        "secondary": "btn btn-secondary",
+    },
+    "actions_sticky_top": True,
+    "show_ui_builder": True,
+}
+
+
