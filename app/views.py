@@ -274,3 +274,16 @@ def coach_application(request):
     else:
         # In case of a GET request, render the application form
         return render(request, 'coach_application.html')
+
+def coach_profile(request, coach_id):
+    coach = models.get_coach(coach_id)
+    coach_expereices = models.coach_experience(coach_id)
+    coach_eduction = models.coach_education(coach_id)
+
+    # Pass 'user' in the context
+    return render(request, 'coach_profile.html', {
+        'coach': coach,
+        'coach_expereinces': coach_expereices,
+        'coach_education': coach_eduction,
+        'user': request.user  # Explicitly pass the user object
+    })
