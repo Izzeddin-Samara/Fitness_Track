@@ -219,3 +219,8 @@ def submit_application(postData, fileData):
     )
     return application
 
+def coach_education(coach_id):
+    return Education.objects.filter(coach__id=coach_id)
+def coach_experience(coach_id):
+    return Experience.objects.filter(coach__id=coach_id)
+
