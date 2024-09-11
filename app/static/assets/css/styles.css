@@ -1,3 +1,4 @@
+/* Button Group Margins */
 .btn-group > .btn {
     margin-right: 5px;
 }
@@ -5,135 +6,126 @@
 .btn-group > .btn:last-child {
     margin-right: 0;
 }
-/* Custom Orange Color (#ed563b) */
-/* Custom Orange Color (#ed563b) */
+
+/* Custom Orange Text and Button */
 #custom-orange-text {
     color: orangered;
     font-weight: bold;
     font-size: xx-large;
-
 }
 
 #custom-orange-text:hover {
-    color: orangered; /* Slightly darker shade for hover effect */
+    color: orangered;
 }
 
 #custom-orange-btn {
-    background-color: orangered;
-    border-color: orangered;
+    background-color: #ed563b; /* Use consistent color for buttons */
+    border-color: #ed563b;
     color: white;
 }
 
 #custom-orange-btn:hover {
-    background-color: orangered;
-    border-color: orangered;
+    background-color: #d94c35; /* Darker orange on hover */
+    border-color: #d94c35;
+    color: white;
 }
-/* Header Text Colors */
 
+/* Header Styles */
 #header-fitness {
-    color: white; /* Blue color for Fitness */
+    color: white; /* White color for FITNESS */
+    font-weight: bold;
 }
 
 #header-track {
-    color: orangered; /* Black color for Track */
+    color: #ed563b; /* Orange color for TRACK */
+    font-weight: bold;
 }
 
 .header-background {
     background-color: rgb(176, 176, 176); /* Light gray background for header */
 }
 
-/* Blue Color for Main Content Headings */
-h2, h3 {
-    color: orangered; /* Apply blue color to all h2 and h3 elements */
-}
-
-/* Blue Color for Links */
+/* Link Colors */
 a {
-    color: orange;
+    color: orange; /* General link color */
 }
 
 a:hover {
-    color: orangered; /* Darker blue on hover */
-}
-/* Custom Colors for Fitness and Track */
-.logo span.fitness {
-    color: orangered; /* Purple color for Fitness */
+    color: orangered; /* Darker color on hover */
 }
 
-.logo em {
-    color: black; /* Black color for Track */
+/* Header Link Styles */
+.header-link {
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the entire heading clickable */
 }
 
-/* Custom Color for Login Button */
-.main-button a {
-    color: blueviolet; /* Blueviolet color for Login */
+.header-link:focus, .header-link:active, .header-link:hover {
+    outline: none; /* Remove outline when clicked, focused, or hovered */
+    text-decoration: none; /* Ensure no underline appears in any state */
 }
 
-.main-button a:hover {
-    color: #8a2be2; /* Slightly darker shade for hover effect */
-}
-/* Header Colors */
-#header-fitness {
-    color: #ffffff; /* White color for Fitness */
+.header-link * {
+    text-decoration: none;
 }
 
-#header-track {
-    color: orangered; /* Orange color for Track */
+.header-link:visited, .header-link:link {
+    text-decoration: none;
+    outline: none;
 }
 
-.bg-dark {
-    background-color: #6c757d !important; /* Bootstrap's default dark background */
+/* Alert Styles */
+#custom-alert-create {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
 }
 
-.text-white {
-    color: #ffffff !important; /* White text for the rest of the header */
+#custom-alert-update {
+    background-color: #cce5ff;
+    color: #004085;
+    border-color: #b8daff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
 }
-#orange {
-    background-color: orangered;
-    border: solid orangered;
+
+#custom-alert-delete {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
 }
-#log {
-    background-color: #000a03;
-    border: solid #000a03;
-}
-#dark {
-    font-weight: bolder;
-}
-#tra {
+
+/* Button Colors */
+.btn-success {
+    background-color: #007bff;
+    border-color: #007bff;
     color: white;
 }
-/* Custom Color for FITNESS and TRACK */
-h1.display-4 {
-    color: #ffffff; /* White color for FITNESS */
-    font-weight: bold;
+
+.btn-success:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
 }
 
-h1.display-4 .custom-orange-text {
-    color: #ed563b; /* Orange color for TRACK */
-    font-weight: bold;
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
 }
 
-/* Custom Orange Button */
-#custom-orange-btn {
-    background-color: #ed563b; /* Orange background */
-    color: #ffffff; /* White text */
-    border: none;
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
 }
 
-#custom-orange-btn:hover {
-    background-color: #d94c35; /* Darker orange on hover */
-    color: #ffffff;
-}
-
-/* Custom Orange Text Links */
-.custom-orange-text {
-    color: #ed563b;
-}
-
-.custom-orange-text:hover {
-    color: #d94c35; /* Darker orange on hover */
-}
-/* Responsive adjustments */
+/* Responsive Adjustments */
 @media (max-width: 1200px) {
     .container {
         max-width: 1000px;
@@ -180,94 +172,8 @@ h1.display-4 .custom-orange-text {
         font-size: 14px;
     }
 }
-/* Custom styles for the update and delete buttons */
-.btn-success {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: white;
-}
 
-.btn-success:hover {
-    background-color: #007bff;
-    border-color: #007bff;
-}
-
-.btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    color: white;
-}
-
-.btn-danger:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-}
-/* Optional: Reduce the overall width of the session cards */
-/* Optional: Add a little padding between the card and the buttons */
-.session-card .row {
-    align-items: center;
-}
-.header-link {
-    text-decoration: none; /* Remove the underline in all states */
-    display: inline-block; /* Make the entire heading clickable */
-}
-
-#header-fitness {
-    color: white; /* White text color for FITNESS */
-    font-weight: bold; /* Make it bold */
-}
-
-#header-track {
-    color: orangered; /* Orange text color for TRACK */
-    font-weight: bold; /* Make it bold */
-}
-
-.header-link:focus, .header-link:active, .header-link:hover {
-    outline: none; /* Remove outline when clicked, focused, or hovered */
-    text-decoration: none; /* Ensure no underline appears in any state */
-}
-
-/* Additional for stubborn browsers like Safari */
-.header-link * {
-    text-decoration: none;
-}
-
-.header-link:visited, .header-link:link {
-    text-decoration: none;
-    outline: none;
-}
-/* Custom alert for creating sessions */
-#custom-alert-create {
-    background-color: #d4edda; /* Light green background */
-    color: #155724;           /* Dark green text */
-    border-color: #c3e6cb;    /* Green border */
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
-
-/* Custom alert for updating sessions */
-#custom-alert-update {
-    background-color: #cce5ff; /* Light blue background */
-    color: #004085;            /* Dark blue text */
-    border-color: #b8daff;     /* Blue border */
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
-
-/* Custom alert for deleting sessions */
-#custom-alert-delete {
-    background-color: #f8d7da; /* Light red background */
-    color: #721c24;            /* Dark red text */
-    border-color: #f5c6cb;     /* Red border */
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
-#name {
-    font-size: xx-large;
-}
+/* Custom Form and Card Styles */
 .form-container, .alert {
     max-width: 100%;
 }
@@ -276,47 +182,29 @@ h1.display-4 .custom-orange-text {
     word-wrap: break-word;
     max-width: 100%;
 }
+
 .main-container {
-    transform: translateX(-200px); /* Adjust this value to control how much you move it to the left */
-    /* Or you can use margin-left instead */
-    /* margin-left: -50px; */
+    transform: translateX(-30px); /* Adjust as needed */
 }
 
-
-/* Adjust the signup form width and position */
-/* Ensure the message container is positioned to the right of the signup form */
 .message-container {
-    position: absolute; /* Absolute positioning to move it out of the flow */
-    right: 20px; /* Adjust the distance from the right side of the page */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Center alignment */
-    max-width: 250px; /* Set a reasonable max width */
-}
-
-.signup-form {
-    position: relative; /* Ensure the signup form container is positioned correctly */
-    width: 100%; /* Allow full width for the form */
-}
-
-
-.alert {
-    margin-bottom: 10px; /* Add space between messages if there are multiple */
-}
-
-#by {
-    font-size: small;
-}
-#message-container {
     position: absolute;
-    right: 10px;
+    right: 20px;
     top: 50%;
     transform: translateY(-50%);
     max-width: 250px;
 }
 
-#main-container {
-    transform: translateX(-30px);
+.signup-form {
+    position: relative;
+    width: 100%;
 }
+
+.alert {
+    margin-bottom: 10px;
+}
+
+/* Miscellaneous */
 .card-title {
     color: #ff4500;
 }
