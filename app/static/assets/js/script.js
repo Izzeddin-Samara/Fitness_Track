@@ -23,12 +23,20 @@ $(document).ready(function () {
     confirmPasswordField.on('input', checkPasswords);
 });
 
-function showForm(type) {
-    if (type === 'user') {
-        document.getElementById('user-form').classList.add('active');
-        document.getElementById('coach-form').classList.remove('active');
-    } else if (type === 'coach') {
-        document.getElementById('coach-form').classList.add('active');
-        document.getElementById('user-form').classList.remove('active');
+function showForm(formType) {
+    document.getElementById('user-form').style.display = 'none';
+    document.getElementById('coach-form').style.display = 'none';
+    document.getElementById('admin-form').style.display = 'none';  // Updated to hide admin form
+
+    if (formType === 'user') {
+        document.getElementById('user-form').style.display = 'block';
+    } else if (formType === 'coach') {
+        document.getElementById('coach-form').style.display = 'block';
+    } else if (formType === 'admin') {
+        document.getElementById('admin-form').style.display = 'block';  // Updated to show admin form
     }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    showForm(document.getElementById('form-select').value);
+});
