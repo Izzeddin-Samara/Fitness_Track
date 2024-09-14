@@ -405,3 +405,25 @@ def update_education(request, education_id):
         return redirect('coach_profile', coach_id=logged_in_coach_id)
     else:
         return render(request, 'update_education.html', {'education': education, 'coach': coach, 'coach_id': logged_in_coach_id})
+
+def delete_education(request, education_id):
+    if 'coach_id' not in request.session:
+        return redirect('login')  
+
+    logged_in_coach_id = request.session['coach_id']
+    
+    
+    education = models.get_education(education_id)
+    coach = education.coach
+
+    
+    if logged_in_coach_id != coach.id:
+        messages.error(request, "You are not authorized to delete this education.")
+        return redirect('coach_profile', coach_id=logged_in_coach_id)  
+
+    
+    models.delete_education(education_id)
+    messages.success(request, "Education deleted successfully.")
+    
+    
+    return redirect('coach_profile', coach_id=logged_in_coach_id)
