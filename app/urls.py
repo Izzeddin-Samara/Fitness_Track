@@ -29,5 +29,6 @@ urlpatterns = [
      path('add_contact',views.add_contact,name = 'add_contact'),
      path('coach_application', views.coach_application, name= 'coch_application'),
      path('coach_profile/<int:coach_id>', views.coach_profile, name= 'coach_profile'),
+     path('add_experience/<int:coach_id>/', views.add_experience, name='add_experience'),
 
 ]

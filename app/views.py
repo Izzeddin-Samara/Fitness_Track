@@ -306,3 +306,23 @@ def coach_profile(request, coach_id):
         'coach_education': coach_eduction,
         'user': request.user  # Explicitly pass the user object
     })
+
+def add_experience(request, coach_id):
+    if 'coach_id' not in request.session:
+        return redirect('login')
+
+    logged_in_coach_id = request.session['coach_id']
+    if logged_in_coach_id != coach_id:
+        return redirect('coach_profile', coach_id=logged_in_coach_id)
+
+    coach = models.get_coach(coach_id)
+    
+    if request.method == 'POST':
+        models.add_experience(request)
+        return redirect('coach_profile', coach_id=coach_id)
+    
+    context = {
+        'coach': coach
+    }
+    
+    return render(request, "experience_form.html", context)
