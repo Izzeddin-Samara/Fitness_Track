@@ -14,23 +14,28 @@
 
 <body class="bg-light">
 
+    <!-- Header -->
     <header class="bg-dark text-white p-3 mb-4">
         <div class="container-custom d-flex justify-content-between align-items-center">
             <h1 class="mb-0">
                 <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
             </h1>
             <div class="user-info">
+                <!-- Conditionally show Logout button only for logged-in user or coach -->
+                {% if is_logged_in %}
                 <form method="post" action="{% url 'logout_user' %}" class="d-inline">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger" id="log">
                         Logout <i class="fas fa-sign-out-alt"></i>
                     </button>
                 </form>
+                {% endif %}
             </div>
         </div>
     </header>
 
-    <div class="container-custom profile-card shadow">
+    <!-- Coach Profile Section -->
+    <div class="container-custom profile-card shadow mb-5">
         <img src="{{ coach.image.url }}" alt="{{ coach.first_name }} {{ coach.last_name }}" class="profile-image">
         <div class="profile-info">
             <h2>{{ coach.first_name }} {{ coach.last_name }}</h2>
@@ -38,55 +43,79 @@
         </div>
     </div>
 
-    <section class="container-custom mt-5">
-        <div class="card section-card">
-            <div class="section-header">
-                <h3>Bio</h3>
-            </div>
-            <div class="section-content">
-                {{ coach.bio }}
-            </div>
-        </div>
-    </section>
-
-    <section class="container-custom mt-5">
-        <div class="card section-card">
-            <div class="section-header">
+    <!-- Experience Section -->
+    <section class="container-custom">
+        <div class="card section-card mb-5">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h3>Experience</h3>
+                {% if is_coach %}
+                <a href="{% url 'add_experience' coach.id %}" class="btn btn-success btn-sm">Add Experience</a>
+                {% endif %}
             </div>
-            <div class="section-content">
-                {% for experience in coach.coach_experiences.all %}
-                <div class="experience-item mb-4">
+            <div class="card-body">
+                {% if coach_experiences %}
+                {% for experience in coach_experiences %}
+                <div class="experience-item mb-4 border-bottom pb-3">
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
-                            <h5 class="mb-1">{{ coach_experiences.job_title }}</h5>
+                            <h5 class="mb-1">{{ experience.job_title }}</h5>
                             <p class="mb-0 text-muted">{{ experience.company_name }}</p>
                             <p class="mb-0 text-muted"><small>{{ experience.company_address }}</small></p>
+                            <p class="mt-2">{{ experience.description }}</p>
+                            <div class="text-muted"><small>{{ experience.date_range }}</small></div>
                         </div>
-                        <div class="text-right">
-                            <p class="mb-0 text-muted"><small>{{ experience.date_range }}</small></p>
+                        <!-- Conditionally show Update and Delete buttons only for the coach -->
+                        {% if is_coach %}
+                        <div class="d-flex flex-column">
+                            <a href="{% url 'update_experience' experience.id %}" class="btn btn-sm btn-info mb-1 w-100">Update Experience</a>
+                            <form action="{% url 'delete_experience' experience.id %}" method="post" class="w-100">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger w-100">Delete</button>
+                            </form>
                         </div>
+                        {% endif %}
                     </div>
-                    <p class="mt-2">{{ experience.description }}</p>
                 </div>
                 {% endfor %}
+                {% else %}
+                <p class="text-muted">No experience available for this coach.</p>
+                {% endif %}
             </div>
         </div>
     </section>
 
+    <!-- Education Section -->
     <section class="container-custom">
         <div class="card section-card">
-            <div class="section-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h3>Education</h3>
+                {% if is_coach %}
+                <a href="{% url 'add_education' coach.id %}" class="btn btn-success btn-sm">Add Education</a>
+                {% endif %}
             </div>
-            <div class="section-content">
+            <div class="card-body">
                 {% if coach_education %}
                 {% for education in coach.coach_educations.all %}
-                <div class="education-item mb-4">
-                    <h5 class="mb-1">{{ education.degree }}</h5>
-                    <p class="mb-0 text-muted"><strong>Institution:</strong> {{ education.institution_name }}</p>
-                    <p class="mb-0 text-muted"><strong>Date Range:</strong> {{ education.date_range }}</p>
-                    <p class="mt-2">{{ education.description }}</p>
+                <div class="education-item mb-4 border-bottom pb-3">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h5 class="mb-1">{{ education.degree }}</h5>
+                            <p class="mb-0 text-muted"><strong>Field of Study:</strong> {{ education.field_of_study }}</p>
+                            <p class="mb-0 text-muted"><strong>Institution:</strong> {{ education.university }}</p>
+                            <p class="mb-0 text-muted"><strong>Date Range:</strong> {{ education.date_range }}</p>
+                            <p class="mt-2">{{ education.university_location }}</p>
+                        </div>
+                        <!-- Conditionally show Update and Delete buttons only for the coach -->
+                        {% if is_coach %}
+                        <div class="d-flex flex-column">
+                            <a href="{% url 'update_education' education.id %}" class="btn btn-sm btn-info mb-1 w-100">Update Education</a>
+                            <form action="{% url 'delete_education' education.id %}" method="post" class="w-100">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger w-100">Delete</button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
                 {% endfor %}
                 {% else %}
