@@ -387,3 +387,21 @@ def add_education(request, coach_id):
     }
     
     return render(request, "education_form.html", context)
+
+def update_education(request, education_id):
+    if 'coach_id' not in request.session:
+        return redirect('login')
+
+    logged_in_coach_id = request.session['coach_id']
+    education = models.get_education(education_id)
+    coach = education.coach
+
+    if logged_in_coach_id != coach.id:
+        return redirect('coach_profile', coach_id=logged_in_coach_id)
+
+    if request.method == 'POST':
+        models.update_education(request, education_id)
+        messages.success(request, f"Education for coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
+        return redirect('coach_profile', coach_id=logged_in_coach_id)
+    else:
+        return render(request, 'update_education.html', {'education': education, 'coach': coach, 'coach_id': logged_in_coach_id})
