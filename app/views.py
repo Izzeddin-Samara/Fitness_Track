@@ -367,3 +367,23 @@ def delete_experience(request, experience_id):
     
     
     return redirect('coach_profile', coach_id=logged_in_coach_id)
+
+def add_education(request, coach_id):
+    if 'coach_id' not in request.session:
+        return redirect('login')
+
+    logged_in_coach_id = request.session['coach_id']
+    if logged_in_coach_id != coach_id:
+        return redirect('coach_profile', coach_id=logged_in_coach_id)
+
+    coach = models.get_coach(coach_id)
+    
+    if request.method == 'POST':
+        models.add_education(request)
+        return redirect('coach_profile', coach_id=coach_id)
+    
+    context = {
+        'coach': coach
+    }
+    
+    return render(request, "education_form.html", context)
