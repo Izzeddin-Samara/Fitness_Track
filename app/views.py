@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 from datetime import date
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.contrib.auth import authenticate, login as auth_login 
 
 def index(request):
     all_the_coaches = models.show_all_coaches(request)
@@ -15,6 +16,24 @@ def index(request):
 
 def login(request):
     return render(request, 'login.html')
+
+def admin_login_view(request):  # Renamed function to avoid conflict
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None and user.is_staff:  
+            
+            auth_login(request, user)
+            return redirect('/admin/') 
+        else:
+            messages.error(request, "Invalid credentials or not an admin user.")
+            return redirect('login_admin') 
+
+    return render(request, 'login.html') 
 
 def login_user(request):
     if request.method == 'POST':
