@@ -151,7 +151,7 @@ JAZZMIN_SETTINGS = {
     "search_model": ["auth.User", "myapp.app"],
     "user_avatar": None,
     "topmenu_links": [
-        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Home", "url": "/", "permissions": ["auth.view_user"]},
         {"name": "Add", "url": "admin:auth_user_add", "permissions": ["auth.add_user"]},
         {"model": "auth.User"},
         {"app": "myapp"},
