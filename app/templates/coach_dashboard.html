@@ -63,28 +63,44 @@
     </div>
 
     
-    <div class="container mb-5">
-        
-        <div class="d-flex justify-content-between align-items-start">
-            <div class="card text-center w-100 shadow rounded mr-3" style="max-width: 49%;">
-                <div class="card-body d-flex flex-column justify-content-between p-4">
-                    <i class="fas fa-calendar-alt fa-2x mb-3"></i> 
-                    <h5 class="card-title">Your Upcoming Sessions</h5>
-                    <p class="card-text flex-grow-1">View and manage your upcoming sessions.</p>
-                    <a href="{% url 'coach_sessions' %}" class="btn btn-primary mt-3" id="orange">View Sessions</a>
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-4 d-flex align-items-stretch">
+                <div class="card text-center w-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <i class="fas fa-calendar-alt fa-2x mb-2"></i> 
+                        <h5 class="card-title">Your Upcoming Sessions</h5>
+                        <p class="card-text flex-grow-1">View your upcoming sessions.</p>
+                        <a href="{% url 'coach_sessions' %}" class="btn btn-primary mt-2" id="orange">View Sessions</a>
+                    </div>
                 </div>
             </div>
+
+            <div class="col-md-4 d-flex align-items-stretch">
+                <div class="card text-center w-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <i class="fas fa-users fa-2x mb-2"></i> 
+                        <h5 class="card-title">Your Profile</h5>
+                        <p class="card-text flex-grow-1">View and manage your profile</p>
+                        <a href="{% url 'coach_profile' coach.id %}" class="btn btn-primary mt-2" id="orange">View Coaches</a>
+                    </div>
+                </div>
+            </div>
+
            
-            <div class="card text-center w-100 shadow rounded ml-3" style="max-width: 49%;">
-                <div class="card-body d-flex flex-column justify-content-between p-4">
-                    <i class="fas fa-comments fa-2x mb-3"></i> 
-                    <h5 class="card-title">Your Recent Reviews</h5>
-                    <p class="card-text flex-grow-1">View and manage your recent reviews.</p>
-                    <a href="{% url 'coach_reviews' %}" class="btn btn-primary mt-3" id="orange">View Reviews</a>
+            <div class="col-md-4 d-flex align-items-stretch">
+                <div class="card text-center w-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <i class="fas fa-comments fa-2x mb-2"></i> 
+                        <h5 class="card-title">Your Recent Reviews</h5>
+                        <p class="card-text flex-grow-1">View your recent reviews.</p>
+                        <a href="{% url 'coach_reviews' %}" class="btn btn-primary mt-2" id="orange">View Reviews</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
