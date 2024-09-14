@@ -344,3 +344,26 @@ def update_experience(request, experience_id):
         return redirect('coach_profile', coach_id=logged_in_coach_id)
     else:
         return render(request, 'update_experience.html', {'experience': experience, 'coach': coach, 'coach_id': logged_in_coach_id})
+
+def delete_experience(request, experience_id):
+    
+    if 'coach_id' not in request.session:
+        return redirect('login')  
+
+    logged_in_coach_id = request.session['coach_id']
+    
+    
+    experience = models.get_experience(experience_id)
+    coach = experience.coach
+
+    
+    if logged_in_coach_id != coach.id:
+        messages.error(request, "You are not authorized to delete this experience.")
+        return redirect('coach_profile', coach_id=logged_in_coach_id)  
+
+    
+    models.delete_experience(experience_id)
+    messages.success(request, "Experience deleted successfully.")
+    
+    
+    return redirect('coach_profile', coach_id=logged_in_coach_id)
