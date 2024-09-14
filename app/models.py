@@ -255,3 +255,35 @@ def get_experience(experience_id):
 def delete_experience(experience_id):
     experience = Experience.objects.get(id=experience_id)
     experience.delete()
+
+def add_education(request):
+    coach_id = request.session.get('coach_id')
+    coach = get_coach(coach_id)
+    field_of_study = request.POST['field_of_study']
+    degree = request.POST['degree']
+    university_name = request.POST['university_name']
+    university_address = request.POST['university_address']
+    date_range = request.POST['date_range']
+    education = Education.objects.create(coach=coach, field_of_study=field_of_study, degree=degree, university_name=university_name, university_address=university_address,date_range=date_range)
+    return education
+
+def update_education(request, education_id):  
+    education = Education.objects.get(id=education_id)
+
+    education.field_of_study = request.POST['field_of_study']
+    education.degree = request.POST['degree']
+    education.university_name = request.POST['university_name']
+    education.university_address = request.POST['university_address']
+    education.date_range = request.POST['date_range']
+   
+    education.save()
+
+    return education
+
+def get_education(education_id):
+    education = Education.objects.get(id=education_id)
+    return education
+
+def delete_education(education_id):
+    education = Education.objects.get(id=education_id)
+    education.delete()
