@@ -224,3 +224,34 @@ def coach_education(coach_id):
 def coach_experience(coach_id):
     return Experience.objects.filter(coach__id=coach_id)
 
+def add_experience(request):
+    coach_id = request.session.get('coach_id')
+    coach = get_coach(coach_id)
+    job_title = request.POST['job_title']
+    company_name = request.POST['company_name']
+    company_address = request.POST['company_address']
+    date_range = request.POST['date_range']
+    description = request.POST['description']
+    experience = Experience.objects.create(coach=coach, job_title=job_title, company_name=company_name, company_address=company_address,date_range=date_range, description=description)
+    return experience
+
+def update_experience(request, experience_id):
+    experience = Experience.objects.get(id=experience_id)
+
+    experience.job_title = request.POST['job_title']
+    experience.company_name = request.POST['company_name']
+    experience.company_address = request.POST['company_address']
+    experience.date_range = request.POST['date_range']
+    experience.description = request.POST['description']
+    experience.save()
+
+    return experience
+
+
+def get_experience(experience_id):
+    experience = Experience.objects.get(id=experience_id)
+    return experience
+
+def delete_experience(experience_id):
+    experience = Experience.objects.get(id=experience_id)
+    experience.delete()
