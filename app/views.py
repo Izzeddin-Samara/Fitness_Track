@@ -326,3 +326,21 @@ def add_experience(request, coach_id):
     }
     
     return render(request, "experience_form.html", context)
+
+def update_experience(request, experience_id):
+    if 'coach_id' not in request.session:
+        return redirect('login')
+
+    logged_in_coach_id = request.session['coach_id']
+    experience = models.get_experience(experience_id)
+    coach = experience.coach
+
+    if logged_in_coach_id != coach.id:
+        return redirect('coach_profile', coach_id=logged_in_coach_id)
+
+    if request.method == 'POST':
+        models.update_experience(request, experience_id)
+        messages.success(request, f"Experience for coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
+        return redirect('coach_profile', coach_id=logged_in_coach_id)
+    else:
+        return render(request, 'update_experience.html', {'experience': experience, 'coach': coach, 'coach_id': logged_in_coach_id})

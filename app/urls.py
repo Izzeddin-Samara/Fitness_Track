@@ -30,5 +30,6 @@ urlpatterns = [
      path('coach_application', views.coach_application, name= 'coch_application'),
      path('coach_profile/<int:coach_id>', views.coach_profile, name= 'coach_profile'),
      path('add_experience/<int:coach_id>/', views.add_experience, name='add_experience'),
+     path('update_experience/<int:experience_id>/', views.update_experience, name='update_experience'),
 
 ]
