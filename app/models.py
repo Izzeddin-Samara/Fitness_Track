@@ -36,9 +36,9 @@ class Coach(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
-    password = models.CharField(max_length=45)
+    password = models.CharField(max_length=128)
     bio = models.TextField()
-    image = models.ImageField(upload_to='media/')
+    image = models.ImageField(upload_to='images/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -79,9 +79,9 @@ class Contact(models.Model):
 class Experience(models.Model):
     coach = models.ForeignKey(Coach, related_name= "coach_experiences", on_delete=models.CASCADE)
     job_title = models.CharField(max_length=100)
-    company_name = models.CharField(max_length=100)
-    company_address = models.CharField(max_length=100)
-    date_range = models.CharField(max_length=50)
+    institution_name = models.CharField(max_length=100)
+    institution_address = models.CharField(max_length=100)
+    date_range = models.CharField(max_length=50, default=1)
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -91,7 +91,6 @@ class Education(models.Model):
     field_of_study = models.CharField(max_length=50) 
     degree = models.CharField(max_length=50)
     university_name = models.CharField(max_length=50)
-    university_address = models.CharField(max_length=100)
     date_range = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -228,11 +227,11 @@ def add_experience(request):
     coach_id = request.session.get('coach_id')
     coach = get_coach(coach_id)
     job_title = request.POST['job_title']
-    company_name = request.POST['company_name']
-    company_address = request.POST['company_address']
+    institution_name = request.POST['institution_name']
+    institution_address = request.POST['institution_address']
     date_range = request.POST['date_range']
     description = request.POST['description']
-    experience = Experience.objects.create(coach=coach, job_title=job_title, company_name=company_name, company_address=company_address,date_range=date_range, description=description)
+    experience = Experience.objects.create(coach=coach, job_title=job_title, institution_name=institution_name, institution_address=institution_address,date_range=date_range, description=description)
     return experience
 
 def update_experience(request, experience_id):
