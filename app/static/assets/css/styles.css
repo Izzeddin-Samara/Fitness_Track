@@ -281,3 +281,8 @@ h1.display-4 .custom-orange-text {
     text-decoration: none;
     margin-top: 20px;
 }
+.join {
+    margin-top: 30px;
+    text-align: center;
+    font-weight: bolder;
+}
