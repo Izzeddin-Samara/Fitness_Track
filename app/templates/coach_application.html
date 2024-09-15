@@ -8,6 +8,7 @@
     {% load static %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
@@ -24,61 +25,80 @@
         </div>
     </header>
 
+    <!-- Content Container -->
     <div class="container">
-        <div class="bg-white p-4 rounded shadow mx-auto" style="max-width: 600px;">
-            <h2 class="text-center mb-4">Coach Application Form</h2>
-            <form action="/coach_application" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                
-            
-                <div class="form-group">
-                    <label for="first_name">First Name:</label>
-                    <input type="text" class="form-control" id="first_name" name="first_name" required>
+        <div class="card shadow-sm mb-4">
+            <div class="row no-gutters">
+
+                <!-- Motivational Section  -->
+                <div class="col-md-6 bg-custom-gray text-white p-4 d-flex flex-column justify-content-center text-center">
+                    <h3 class="card-title text-orange">Become a Part of Our Elite Coaching Team!</h3>
+                    <p class="card-text" style="color: black;">At Fitness Track, we believe in empowering individuals to reach their fullest potential. As a coach, you'll have the opportunity to inspire, motivate, and guide our community to achieve their fitness goals. If you're passionate about fitness and love making a difference, we want to hear from you!</p>
+                    <p class="card-text font-weight-bold" style="color: black;">Your journey to impact starts here. Apply now and help shape the future of fitness!</p>
                 </div>
 
-                
-                <div class="form-group">
-                    <label for="last_name">Last Name:</label>
-                    <input type="text" class="form-control" id="last_name" name="last_name" required>
+                <!-- Application Form -->
+                <div class="col-md-6 p-4">
+                    <h2 class="card-title text-center text-orange mb-4">Coach Application Form</h2>
+                    <form action="/coach_application" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <!-- First Name and Last Name -->
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="first_name"><i class="fas fa-user"></i> First Name:</label>
+                                <input type="text" class="form-control" id="first_name" name="first_name" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="last_name"><i class="fas fa-user"></i> Last Name:</label>
+                                <input type="text" class="form-control" id="last_name" name="last_name" required>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="form-group">
+                            <label for="address"><i class="fas fa-map-marker-alt"></i> Address:</label>
+                            <input type="text" class="form-control" id="address" name="address" required>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="form-group">
+                            <label for="phone_number"><i class="fas fa-phone"></i> Phone Number (with country code):</label>
+                            <input type="tel" class="form-control" id="phone_number" name="phone_number" required>
+                            <small class="form-text text-muted">Include your country code, e.g., +1 234-567-8901.</small>
+                        </div>
+
+                        <!-- Certificates  -->
+                        <div class="form-group">
+                            <label for="certificates"><i class="fas fa-file-pdf"></i> Certificates (PDF only):</label>
+                            <input type="file" class="form-control-file" id="certificates" name="certificates" accept=".pdf" required>
+                        </div>
+
+                        <!-- CV -->
+                        <div class="form-group">
+                            <label for="cv"><i class="fas fa-file-pdf"></i> CV (PDF only):</label>
+                            <input type="file" class="form-control-file" id="cv" name="cv" accept=".pdf" required>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-custom-orange btn-lg btn-block">
+                                <i class="fas fa-paper-plane"></i> Submit Application
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
-                
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-
-                
-                <div class="form-group">
-                    <label for="address">Address:</label>
-                    <input type="text" class="form-control" id="address" name="address" required>
-                </div>
-
-                
-                <div class="form-group">
-                    <label for="phone_number">Phone Number (with country code):</label>
-                    <input type="tel" class="form-control" id="phone_number" name="phone_number" required>
-                </div>
-
-               
-                <div class="form-group">
-                    <label for="certificates">Certificates (PDF only):</label>
-                    <input type="file" class="form-control-file" id="certificates" name="certificates" accept=".pdf" required>
-                </div>
-
-                
-                <div class="form-group">
-                    <label for="cv">CV (PDF only):</label>
-                    <input type="file" class="form-control-file" id="cv" name="cv" accept=".pdf" required>
-                </div>
-                
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Submit Application</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 
-
+</body>
 
 </html>
