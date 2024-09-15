@@ -10,8 +10,8 @@ urlpatterns = [
      path('register/', views.register, name='register'),
      path('user_dashboard/', views.user_dashboard, name='user_dashboard'),
      path('coach_dashboard/', views.coach_dashboard, name='coach_dashboard'),
-      path('coach_sessions/', views.coach_sessions, name='coach_sessions'),
-      path('coach_reviews/', views.coach_reviews, name='coach_reviews'),
+     path('coach_sessions/', views.coach_sessions, name='coach_sessions'),
+     path('coach_reviews/', views.coach_reviews, name='coach_reviews'),
      path('create_session/<int:coach_id>/', views.create_session, name='create_session'),
      path('update_session/<int:session_id>/', views.update_session, name='update_session'),
      path('cancel_session/<int:session_id>/', views.cancel_session, name='cancel_session'),
@@ -35,5 +35,5 @@ urlpatterns = [
      path('add_education/<int:coach_id>/', views.add_education, name='add_education'),
      path('update_education/<int:education_id>/', views.update_education, name='update_education'),
      path('delete_education/<int:education_id>/', views.delete_education, name='delete_education'),
-
+     path('coach/<int:coach_id>/update-bio/', views.update_bio, name='update_bio'),
 ]
