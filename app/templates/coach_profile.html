@@ -34,22 +34,66 @@
         </div>
     </header>
 
+
     <!-- Coach Profile Section -->
-    <div class="container-custom profile-card shadow mb-5">
-        <img src="{{ coach.image.url }}" alt="{{ coach.first_name }} {{ coach.last_name }}" class="profile-image">
-        <div class="profile-info">
-            <h2>{{ coach.first_name }} {{ coach.last_name }}</h2>
-            <p>{{ coach.email }}</p>
+    <div class="container profile-card shadow mb-5">
+        <div class="row align-items-center profile-info-container">
+            <!-- Profile Image and Change Photo Icon -->
+            <div class="col-md-4 text-center">
+                <div class="profile-image-container">
+                    <!-- Display Current Profile Image -->
+                    {% if coach.image %}
+                    <img src="{{ coach.image.url }}" alt="{{ coach.first_name }} {{ coach.last_name }}" class="profile-image img-thumbnail rounded-circle" style="max-width: 150px;">
+                    {% else %}
+                    <img src="{% static 'assets/img/default-profile.png' %}" alt="Default Profile" class="profile-image img-thumbnail rounded-circle" style="max-width: 150px;">
+                    {% endif %}
+                    
+                    <!-- Change Photo Form -->
+                    {% if is_coach %}
+                    <form method="post" action="{% url 'update_image' coach.id %}" enctype="multipart/form-data" id="changePhotoForm">
+                        {% csrf_token %}
+                        <!-- Custom file input as icon -->
+                        <label for="file-upload" class="camera-icon" style="cursor: pointer;">
+                            <i class="fas fa-camera text-primary"></i>
+                        </label>
+                        <input id="file-upload" type="file" name="image" onchange="document.getElementById('changePhotoForm').submit()" style="display: none;">
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Profile Info on the Same Line as Image -->
+            <div class="col-md-8">
+                <div class="profile-info">
+                    <h2 class="text-orange">{{ coach.first_name }} {{ coach.last_name }}</h2>
+                    <p class="text-muted">{{ coach.email }}</p>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Bio Section -->
+    <section class="container">
+        <div class="card section-card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3>Bio</h3>
+                {% if is_coach %}
+                <a href="{% url 'update_bio' coach.id %}" class="btn btn-info btn-sm">Update Bio</a>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <p>{{ coach.bio }}</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Experience Section -->
-    <section class="container-custom">
+    <section class="container">
         <div class="card section-card mb-5">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h3>Experience</h3>
                 {% if is_coach %}
-                <a href="{% url 'add_experience' coach.id %}" class="btn btn-success btn-sm">Add Experience</a>
+                <a href="{% url 'add_experience' coach.id %}" class="btn btn-info btn-sm">Add Experience</a>
                 {% endif %}
             </div>
             <div class="card-body">
@@ -67,7 +111,7 @@
                         <!-- Conditionally show Update and Delete buttons only for the coach -->
                         {% if is_coach %}
                         <div class="d-flex flex-column">
-                            <a href="{% url 'update_experience' experience.id %}" class="btn btn-sm btn-info mb-1 w-100">Update Experience</a>
+                            <a href="{% url 'update_experience' experience.id %}" class="btn btn-sm btn-info mb-1 w-100">Update</a>
                             <form action="{% url 'delete_experience' experience.id %}" method="post" class="w-100">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-sm btn-danger w-100">Delete</button>
@@ -85,12 +129,12 @@
     </section>
 
     <!-- Education Section -->
-    <section class="container-custom">
+    <section class="container">
         <div class="card section-card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h3>Education</h3>
                 {% if is_coach %}
-                <a href="{% url 'add_education' coach.id %}" class="btn btn-success btn-sm">Add Education</a>
+                <a href="{% url 'add_education' coach.id %}" class="btn btn-info btn-sm">Add Education</a>
                 {% endif %}
             </div>
             <div class="card-body">
@@ -108,7 +152,7 @@
                         <!-- Conditionally show Update and Delete buttons only for the coach -->
                         {% if is_coach %}
                         <div class="d-flex flex-column">
-                            <a href="{% url 'update_education' education.id %}" class="btn btn-sm btn-info mb-1 w-100">Update Education</a>
+                            <a href="{% url 'update_education' education.id %}" class="btn btn-sm btn-info mb-1 w-100">Update</a>
                             <form action="{% url 'delete_education' education.id %}" method="post" class="w-100">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-sm btn-danger w-100">Delete</button>
