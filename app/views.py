@@ -331,17 +331,24 @@ def coach_application(request):
         # In case of a GET request, render the application form
         return render(request, 'coach_application.html')
 
+
 def coach_profile(request, coach_id):
     coach = models.get_coach(coach_id)
-    coach_expereices = models.coach_experience(coach_id)
-    coach_eduction = models.coach_education(coach_id)
+    coach_experiences = models.coach_experience(coach_id)
+    coach_education = models.coach_education(coach_id)  
 
-    # Pass 'user' in the context
+    
+    is_coach = 'coach_id' in request.session and request.session['coach_id'] == coach_id
+
+    is_logged_in = request.user.is_authenticated or is_coach
+
+    
     return render(request, 'coach_profile.html', {
         'coach': coach,
-        'coach_expereinces': coach_expereices,
-        'coach_education': coach_eduction,
-        'user': request.user  # Explicitly pass the user object
+        'coach_experiences': coach_experiences,
+        'coach_education': coach_education,  
+        'is_coach': is_coach,
+        'is_logged_in': is_logged_in,
     })
 
 def add_experience(request, coach_id):
