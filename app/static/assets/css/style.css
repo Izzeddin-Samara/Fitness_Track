@@ -192,3 +192,38 @@
     display: flex;
     align-items: center;
 }
+
+.bg-custom-gray {
+    background-color: white !important; /* Custom gray color */
+}
+
+.text-orange {
+    color: #ff4500 !important; /* Orange color for text */
+}
+
+.btn-custom-orange {
+    background-color: #6c757d !important; /* Orange button */
+    border: none;
+    color: white;
+}
+
+.btn-custom-orange:hover {
+    background-color: #ff4500  !important; /* Darker orange on hover */
+}
+
+.motivational-content {
+    height: 100%; /* Full height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content */
+    padding: 20px; /* Add padding */
+}
+
+.motivational-content h3 {
+    margin-bottom: 20px; /* Reduced spacing */
+}
+
+.motivational-content p {
+    margin-bottom: 20px; /* Reduced spacing */
+    color: black;
+}
