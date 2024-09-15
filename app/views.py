@@ -482,3 +482,24 @@ def update_bio(request, coach_id):
         return redirect('coach_profile', coach_id=logged_in_coach_id)
     else:
         return render(request, 'update_bio.html', {'coach': coach, 'coach_id': logged_in_coach_id})
+    
+def update_image(request, coach_id):
+    
+    coach = models.get_coach(coach_id)
+
+    if request.method == 'POST' and 'image' in request.FILES:
+        
+        image = request.FILES.get('image')
+        
+        if image:  
+            coach.image = image
+            coach.save()
+            messages.success(request, "Profile image updated successfully.")
+        else:
+            messages.error(request, "Please upload a valid image.")
+        
+        return redirect('coach_profile', coach_id=coach.id)
+
+    
+    messages.error(request, "Invalid request to update image.")
+    return redirect('coach_profile', coach_id=coach.id)
