@@ -185,22 +185,24 @@ JAZZMIN_SETTINGS = {
 
 
 JAZZMIN_UI_TWEAKS = {
-    "theme": "united",
-    "navbar": "navbar-dark navbar-expand-lg",
-    "navbar_color": "#ed563b",
-    "navbar_fixed": True,
-    "sidebar": "sidebar-dark",
-    "sidebar_color": "#6c757d",
-    "sidebar_fixed": True,
-    "accent": "#e74c3c",
-    "link_hover_color": "#e74c3c",
-    "link_color": "#e74c3c",
+    "theme": "cerulean",  # Set your theme
+    "navbar": "navbar navbar-expand-lg bg-light",  # Dark navbar with white text for visibility
+    "sidebar": "sidebar-dark",  # Dark sidebar
+    "sidebar_fixed": True,  # Fixed sidebar position
+
+    # Customize button classes to adjust their colors
     "button_classes": {
-        "primary": "btn btn-danger",
-        "secondary": "btn btn-secondary",
+        "primary": "btn btn-primary",  # Gray buttons for primary actions like "Add" or "Change"
+        "secondary": "btn btn-outline-secondary",  # Yellow outline buttons for secondary actions, closer to orange
+        "success": "btn btn-primary",  # Green buttons for successful actions
+        "info": "btn btn-info",  # Light Blue buttons for informational actions
+        "warning": "btn btn-warning",  # Yellow buttons for warning actions
+        "danger": "btn btn-danger",  # Red buttons for destructive actions like "Delete" or "Cancel"
     },
-    "actions_sticky_top": True,
-    "show_ui_builder": True,
+
+    "actions_sticky_top": True,  # Sticky action buttons on the top
+    "show_ui_builder": True,  # UI builder visibility
 }
+
 
 
