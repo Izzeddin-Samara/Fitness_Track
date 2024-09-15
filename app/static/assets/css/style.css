@@ -172,3 +172,23 @@
     max-width: 900px; 
     margin: 0 auto; 
 }
+
+.profile-card {
+    position: relative;
+}
+.profile-image-container {
+    position: relative;
+    display: inline-block;
+}
+.camera-icon {
+    position: absolute;
+    top: 0;  /* Position at the top */
+    transform: translate(30%, -30%);  /* Adjust position to appear correctly on the edge */
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+}
+.profile-info-container {
+    display: flex;
+    align-items: center;
+}
