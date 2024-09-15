@@ -123,6 +123,14 @@ def create_session(request, coach_id):
             [session.user.email], 
             fail_silently=False,
         )
+
+        send_mail(
+            'New Session Booked',
+            f'A new session has been booked by {user.first_name} {user.last_name} on {session.date} at {session.duration}. Please check your dashboard for more details.',
+            'izzidinsamara@gmail.com',
+            [session.coach.email], 
+            fail_silently=False,
+        )
         messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} booked successfully, session details have been sent to your email", extra_tags='success')
         return redirect('/upcoming_sessions')
 
@@ -150,6 +158,14 @@ def update_session(request, session_id):
             [session.user.email],
             fail_silently=False,
         )
+
+        send_mail(
+            'Session Updated',
+            f'The session booked by {user.first_name} {user.last_name} has been updated to be on {session.date} at {session.duration} at {session.place}. Please check your dashboard for more details.',
+            'izzidinsamara@gmail.com',
+            [session.coach.email],  # Only coach email
+            fail_silently=False,
+        )
         messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
         return redirect('/upcoming_sessions')
     else:
@@ -171,6 +187,14 @@ def cancel_session(request, session_id):
         f'Your session with coach {coach.first_name} {coach.last_name} on {session.date} at {session.duration} has been successfully cancelled.',
         'izzidinsamara@gmail.com',
         [session.user.email],
+        fail_silently=False,
+    )
+
+    send_mail(
+        'Session Cancelled',
+        f'The session booked by {user.first_name} {user.last_name} on {session.date} at {session.duration} has been cancelled.',
+        'izzidinsamara@gmail.com',
+        [session.coach.email],  # Only coach email
         fail_silently=False,
     )
 
