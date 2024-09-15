@@ -261,9 +261,8 @@ def add_education(request):
     field_of_study = request.POST['field_of_study']
     degree = request.POST['degree']
     university_name = request.POST['university_name']
-    university_address = request.POST['university_address']
     date_range = request.POST['date_range']
-    education = Education.objects.create(coach=coach, field_of_study=field_of_study, degree=degree, university_name=university_name, university_address=university_address,date_range=date_range)
+    education = Education.objects.create(coach=coach, field_of_study=field_of_study, degree=degree, university_name=university_name, date_range=date_range)
     return education
 
 def update_education(request, education_id):  
@@ -272,7 +271,6 @@ def update_education(request, education_id):
     education.field_of_study = request.POST['field_of_study']
     education.degree = request.POST['degree']
     education.university_name = request.POST['university_name']
-    education.university_address = request.POST['university_address']
     education.date_range = request.POST['date_range']
    
     education.save()
