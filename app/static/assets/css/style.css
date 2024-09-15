@@ -227,3 +227,22 @@
     margin-bottom: 20px; /* Reduced spacing */
     color: black;
 }
+
+.contact-page .form-alert {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    width: 90%;
+    max-width: 500px;
+}
+
+.contact-page .alert {
+    margin-bottom: 0;
+}
+
+.contact-page .form-container {
+    position: relative; /* Ensures the alert is positioned relative to this container */
+    padding-top: 60px; /* Adds some space for the alert to appear without pushing the form down */
+}
