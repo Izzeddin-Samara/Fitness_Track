@@ -106,6 +106,10 @@ def coach_reviews(request):
         return render(request, 'coach_reviews.html', {'coach': coach, 'user_reviews': coach_reviews})
 
 def create_session(request, coach_id):
+    if 'userid' not in request.session:
+        return redirect('login')
+    user_id = request.session['userid']
+    user = models.get_user(user_id)
     min_date = date.today().isoformat()
     coach = models.get_coach(coach_id)
 
@@ -123,9 +127,13 @@ def create_session(request, coach_id):
         return redirect('/upcoming_sessions')
 
     
-    return render(request, 'session_form.html', {'coach': coach, 'coach_id': coach_id, 'min_date': min_date})
+    return render(request, 'session_form.html', {'user': user, 'coach': coach, 'coach_id': coach_id, 'min_date': min_date})
 
 def update_session(request, session_id):
+    if 'userid' not in request.session:
+        return redirect('login')
+    user_id = request.session['userid']
+    user = models.get_user(user_id)
     min_date = date.today().isoformat()
     session = models.get_session(session_id)
     coach = session.coach 
@@ -145,23 +153,42 @@ def update_session(request, session_id):
         messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
         return redirect('/upcoming_sessions')
     else:
-        return render(request, 'update_session.html', {'session': session, 'coach': coach, 'min_date': min_date})
+        return render(request, 'update_session.html', {'user': user, 'session': session, 'coach': coach, 'min_date': min_date})
 
 def cancel_session(request, session_id):
+    if 'userid' not in request.session:
+        return redirect('login')
+
+    user_id = request.session['userid']
+    user = models.get_user(user_id)
     session = models.get_session(session_id)
     coach = session.coach
+
     models.delete_session(session_id)
+
     send_mail(
         'Session Deleted Successfully',
-        f'Your session with coach {coach.first_name} {coach.last_name} on {session.date} at {session.duration}  has been successfully cancelled.',
+        f'Your session with coach {coach.first_name} {coach.last_name} on {session.date} at {session.duration} has been successfully cancelled.',
         'izzidinsamara@gmail.com',
         [session.user.email],
         fail_silently=False,
     )
-    messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} cancelled successfully", extra_tags='success')
+
+    messages.success(
+        request,
+        f"Session with coach {coach.first_name} {coach.last_name} cancelled successfully",
+        extra_tags='success'
+    )
+
     return redirect('/upcoming_sessions')
 
+
 def create_review(request, coach_id):
+    if 'userid' not in request.session:
+        return redirect('login')
+
+    user_id = request.session['userid']
+    user = models.get_user(user_id)
     coach = models.get_coach(coach_id)  
 
     if request.method == 'POST':
@@ -178,9 +205,14 @@ def create_review(request, coach_id):
         messages.success(request, f"Review submitted successfully for coach {coach.first_name} {coach.last_name}", extra_tags='success')
         return redirect('/recent_reviews')
 
-    return render(request, 'review_form.html', {'coach': coach, 'coach_id': coach_id})
+    return render(request, 'review_form.html', {'user': user, 'coach': coach, 'coach_id': coach_id})
 
 def update_review(request, review_id):
+    if 'userid' not in request.session:
+        return redirect('login')
+
+    user_id = request.session['userid']
+    user = models.get_user(user_id)
     review = models.get_review(review_id)
     coach = review.coach  
 
@@ -192,6 +224,11 @@ def update_review(request, review_id):
         return render(request, 'update_review.html', {'review': review, 'coach': coach})
 
 def delete_review(request, review_id):
+    if 'userid' not in request.session:
+        return redirect('login')
+
+    user_id = request.session['userid']
+    user = models.get_user(user_id)
     review = models.get_review(review_id)
     models.delete_review(review_id)
     coach = review.coach    
