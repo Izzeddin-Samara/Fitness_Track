@@ -286,3 +286,16 @@ def get_education(education_id):
 def delete_education(education_id):
     education = Education.objects.get(id=education_id)
     education.delete()
+
+def update_bio(request, coach_id):
+    coach = get_coach(coach_id)
+    coach.bio = request.POST['bio']
+    coach.save()
+
+    return coach
+
+
+def update_image(self, image_file):
+        """Update the coach's profile image."""
+        self.image = image_file
+        self.save()
