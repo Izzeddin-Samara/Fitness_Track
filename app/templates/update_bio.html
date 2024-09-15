@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+
+<body class="bg-light">
+
+    <!-- Header -->
+    <header class="bg-dark text-white p-3 mb-4">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="mb-0">
+                <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
+            </h1>
+            <div class="user-info">
+                <!-- Conditionally show Logout button only for logged-in user or coach -->
+                {% if is_logged_in %}
+                <form method="post" action="{% url 'logout_user' %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" id="log">
+                        Logout <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2 class="mb-4">Update Your Bio</h2>
+        <form method="post" action="{% url 'update_bio' coach.id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="content">Bio:</label>
+                <textarea name="bio" rows="4" class="form-control" required>{{ coach.bio }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Save <i class="fas fa-edit"></i>
+            </button>
+        </form>
+    </div>
+</body>
+</html>
