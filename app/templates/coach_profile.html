@@ -18,11 +18,24 @@
     <header class="bg-dark text-white p-3 mb-4">
         <div class="container-custom d-flex justify-content-between align-items-center">
             <h1 class="mb-0">
-                <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
+                {% if is_coach %}
+                    <a href="{% url 'coach_dashboard' %}" class="header-link text-white">
+                        <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
+                    </a>
+                {% elif is_logged_in %}
+                    <a href="{% url 'user_dashboard' %}" class="header-link text-white">
+                        <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
+                    </a>
+                {% else %}
+                    <a href="/" class="header-link text-white">
+                        <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
+                    </a>
+                {% endif %}
             </h1>
+            
             <div class="user-info">
                 <!-- Conditionally show Logout button only for logged-in user or coach -->
-                {% if is_logged_in %}
+                {% if is_coach or is_logged_in %}
                 <form method="post" action="{% url 'logout_user' %}" class="d-inline">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger" id="log">
@@ -33,7 +46,7 @@
             </div>
         </div>
     </header>
-
+    
 
     <!-- Coach Profile Section -->
     <div class="container profile-card shadow mb-5">
