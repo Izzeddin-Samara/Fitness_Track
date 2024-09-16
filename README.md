@@ -25,3 +25,33 @@ FitnessTrack is a professional web application designed to connect users with ce
 
 - **Contact Form for Inquiries**: Users can use a contact form to reach out for support, ask questions, or provide feedback.
 
+## Technology Stack
+
+- **Python & Django**:  
+  - Used for backend development to handle user authentication, session bookings, review systems, and overall data management. Django’s robust framework allows for secure and scalable development, ensuring smooth management of users and coaches.
+
+- **MySQL**:  
+  - Chosen as the database to efficiently store and manage data related to users, coaches, sessions, and reviews. It ensures data integrity and supports complex queries needed for the booking and review systems.
+
+- **JavaScript**:  
+  -  - Used to create interactive elements on the frontend, such as toggling visibility of content, managing dynamic user interactions, and improving navigation.
+
+- **jQuery**:  
+  - A lightweight JavaScript library used to add interactivity to the frontend, such as providing real-time feedback for password matching during registration and enhancing user interface elements like toggling content visibility or other dynamic interactions.
+
+- **HTML & CSS**:  
+  - Core technologies for structuring and styling the frontend, ensuring a clean, responsive design that enhances user experience across all devices.
+
+- **Bootstrap**:  
+  - A front-end framework that ensures the platform is mobile-friendly and visually consistent, providing a responsive design for all pages.
+
+- **Jazzmin**:  
+  - Customizes the Django admin interface, providing a modern and intuitive dashboard for admins to manage the platform effectively.
+
+- **Mailjet**:  
+  - Integrated for sending automated emails to users and coaches for session bookings, updates, and cancellations to ensure everyone stays informed.
+
+- **Git**:  
+  - Used for version control, managing code changes, and keeping the development process organized and efficient.
+
+
