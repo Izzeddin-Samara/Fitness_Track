@@ -13,60 +13,64 @@
 
 <body>
 
+    <!-- Header -->
     <header class="bg-dark text-white p-3 mb-4">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a href="/coach_dashboard" class="header-link">
-                <h1 class="mb-0">
-                    <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
-                </h1>
-            </a>
+        <div class="container" style="max-width: 800px;"> <!-- Set a max-width to align with the form -->
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="/coach_dashboard" class="header-link">
+                    <h1 class="mb-0">
+                        <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
+                    </h1>
+                </a>
 
-            <div class="user-info">
-                <form method="post" action="{% url 'logout_user' %}" class="d-inline">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger" id="log">
-                        Logout <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                </form>
+                <div class="user-info">
+                    <form method="post" action="{% url 'logout_user' %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" id="log">
+                            Logout <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <h2 class="mb-4">Add Education</h2>
+    <!-- Form Container -->
+    <div class="container" style="max-width: 800px;"> <!-- Match the max-width with header for alignment -->
+        <h2 class="mb-4">Add Education</h2> <!-- Centered and colored title -->
+        <div class="row justify-content-center">
+            <div class="col-12"> <!-- Full width within the container -->
+                <form method="post" action="{% url 'add_education' coach.id %}" class="needs-validation p-4 border rounded shadow-sm">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="field_of_study"><i class="fas fa-book"></i> Field of Study</label>
+                        <input type="text" class="form-control" id="field_of_study" name="field_of_study" placeholder="Enter field of study" required>
+                        <div class="invalid-feedback">Please enter a field of study.</div>
+                    </div>
 
-        
-        <form method="post" action="{% url 'add_education' coach.id %}">
-            {% csrf_token %}
-            
-            <div class="form-group">
-                <label for="field_of_study">Field of Study</label>
-                <input type="text" class="form-control" id="field_of_study" name="field_of_study" required>
+                    <div class="form-group">
+                        <label for="degree"><i class="fas fa-graduation-cap"></i> Degree</label>
+                        <input type="text" class="form-control" id="degree" name="degree" placeholder="Enter degree" required>
+                        <div class="invalid-feedback">Please enter a degree.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="university_name"><i class="fas fa-university"></i> University Name</label>
+                        <input type="text" class="form-control" id="university_name" name="university_name" placeholder="Enter university name" required>
+                        <div class="invalid-feedback">Please enter a university name.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date_range"><i class="fas fa-calendar-alt"></i> Date Range</label>
+                        <input type="text" class="form-control" id="date_range" name="date_range" placeholder="e.g., Jan 2020 - Dec 2022" required>
+                        <div class="invalid-feedback">Please enter a date range.</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-info btn-block"><i class="fas fa-save"></i> Save Education</button>
+                </form>
             </div>
-
-            <div class="form-group"></div>
-                <label for="degree">Degree</label>
-                <input type="text" class="form-control" id="degree" name="degree" required>
-            </div>
-
-            <div class="form-group">
-                <label for="university_name">University Name</label>
-                <input type="text" class="form-control" id="university_name" name="university_name" required>
-            </div>
-
-            <div class="form-group">
-                <label for="university_address">University Address</label>
-                <input type="text" class="form-control" id="university_address" name="university_address" required>
-            </div>
-
-            <div class="form-group">
-                <label for="date_range">Date Range</label>
-                <input type="text" class="form-control" id="date_range" name="date_range" required>
-            </div>
-
-
-            <button type="submit" class="btn btn-success">Save</button>
-        </form>
+        </div>
     </div>
 
 </body>
