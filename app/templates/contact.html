@@ -14,7 +14,7 @@
 
 <body class="bg-light">
 
-    <!-- Header -->
+    
     <header class="bg-dark text-white p-3 mb-0">
         <div class="container d-flex justify-content-between align-items-center">
             <a href="/" class="header-link">
@@ -25,12 +25,12 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="container mt-5">
+    
+    <div class="container mt-5 contact-page">
         <div class="card shadow-sm mb-4">
             <div class="row no-gutters">
 
-                <!-- Contact Information Section on the Left -->
+                
                 <div class="col-lg-5 p-4 bg-light text-dark">
                     <h2 class="text-orange mb-4">Stay Connected with Us!</h2>
                     <p>We love to hear from our users! Whether you have a suggestion, want to report an issue, or just wish to share your fitness journey with us, please feel free to drop us a message.</p>
@@ -38,14 +38,13 @@
                     <p>Every piece of feedback is valuable to us. It helps us understand what we are doing well and where we can improve to serve you better.</p>
                     <p class="font-weight-bold">Be Part of Our Community:</p>
                     <p>Join our growing community of fitness enthusiasts and help us build a platform that caters to your needs. Together, we can achieve greatness!</p>
-                    <hr class="my-4"> 
+                    <hr class="my-4">
                     <p class="text-success mt-4">Fitness is not about being better than someone else; it’s about being better than you used to be.</p>
                 </div>
 
-                <!-- Contact Form on the Right with Additional Content -->
+                
                 <div class="col-lg-7 p-4">
                     <div class="form-container text-center">
-                        
                         {% if messages %}
                         <div class="form-alert">
                             {% for message in messages %}
@@ -58,8 +57,8 @@
                             {% endfor %}
                         </div>
                         {% endif %}
-
-                        <h2 class="text-orange mb-4">Contact US</h2>
+                        
+                        <h2 class="text-orange mb-4">Contact Us</h2>
                         <p class="text-muted mb-4">We typically respond within 24-48 hours. Let us know how we can assist you!</p> <!-- Response Time Information -->
                         <form id="contact-form" action="{% url 'add_contact' %}" method="post">
                             {% csrf_token %}
@@ -77,9 +76,6 @@
                             </div>
                             <button type="submit" class="btn btn-primary mb-3">Send Message</button>
                         </form>
-
-                        
-                        
                     </div>
                 </div>
 
