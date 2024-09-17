@@ -64,7 +64,32 @@
                         </p>
                         <div class="d-flex justify-content-end">
                             <a href="{% url 'update_session' session.id %}" class="btn btn-outline-success btn-sm mr-2"><i class="fas fa-edit"></i> Update</a>
-                            <a href="{% url 'cancel_session' session.id %}" class="btn btn-outline-danger btn-sm"><i class="fas fa-times"></i> Cancel</a>
+                            <!-- Button to trigger modal -->
+                            <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#confirmCancelModal{{ session.id }}"><i class="fas fa-times"></i> Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for confirming session cancellation -->
+            <div class="modal fade" id="confirmCancelModal{{ session.id }}" tabindex="-1" role="dialog" aria-labelledby="confirmCancelModalLabel{{ session.id }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-danger text-white">
+                            <h5 class="modal-title" id="confirmCancelModalLabel{{ session.id }}">Confirm Action</h5>
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <p>Are you sure you want to cancel your session with Coach {{ session.coach.first_name }} {{ session.coach.last_name }} on {{ session.date }}?</p>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
+                            <form action="{% url 'cancel_session' session.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Yes! I want to Cancel</button>
+                            </form>
                         </div>
                     </div>
                 </div>
