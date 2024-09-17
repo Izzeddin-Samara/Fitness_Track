@@ -40,7 +40,7 @@
         <h2 class="mb-4">Update Education</h2> <!-- Centered and colored title -->
         <div class="row justify-content-center">
             <div class="col-12"> <!-- Full width within the container -->
-                <form method="post" action="{% url 'update_education' coach.id %}" class="needs-validation p-4 border rounded shadow-sm">
+                <form method="post" action="{% url 'update_education' education.id %}" class="needs-validation p-4 border rounded shadow-sm">
                     {% csrf_token %}
                     
                     <div class="form-group">
