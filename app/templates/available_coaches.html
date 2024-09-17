@@ -44,14 +44,14 @@
                             <p class="card-text">{{ coach.bio }}</p>
                         </div>
                         <div class="card-footer text-center">
-                            <a href="{% url 'create_session' coach.id %}" class="btn btn-primary btn-sm">
+                            <a href="{% url 'create_session' coach.id %}" class="btn btn-success btn-sm">
                                 Book Session <i class="fas fa-calendar-plus"></i>
                             </a>
                             <a href="{% url 'create_review' coach.id %}" class="btn btn-secondary btn-sm">
                                 Leave Review <i class="fas fa-comment-alt"></i>
                             </a>
                             <a href="{% url 'coach_profile' coach.id %}" class="btn btn-info btn-sm" style="margin-top: 10px;">
-                                View Profile
+                                View Profile <i class="fas fa-user"></i>
                             </a>
                         </div>
                     </div>
