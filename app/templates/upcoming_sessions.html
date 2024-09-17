@@ -50,22 +50,27 @@
             <h1>Your Upcoming Sessions</h1>
             <a href="/available_coaches" class="btn btn-success btn-sm">Book a new session</a>
         </div>
-        <ul class="list-group">
+
+        <div class="row">
             {% for session in user.user_sessions.all %}
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-md-8">
-                        <strong>{{ session.date }} - {{ session.duration }}</strong><br>
-                        With Coach: {{ session.coach.first_name }} {{ session.coach.last_name }}
-                    </div>
-                    <div class="col-md-4 text-right">
-                        <a href="{% url 'update_session' session.id %}" class="btn btn-success btn-sm">Update</a>
-                        <a href="{% url 'cancel_session' session.id %}" class="btn btn-danger btn-sm">Cancel</a>
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-calendar-alt"></i> {{ session.date }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-clock"></i> Duration: {{ session.duration }}</h6>
+                        <p class="card-text">
+                            <i class="fas fa-user"></i> Coach: {{ session.coach.first_name }} {{ session.coach.last_name }}<br>
+                            <i class="fas fa-map-marker-alt"></i> Place: {{ session.place }}
+                        </p>
+                        <div class="d-flex justify-content-end">
+                            <a href="{% url 'update_session' session.id %}" class="btn btn-outline-success btn-sm mr-2"><i class="fas fa-edit"></i> Update</a>
+                            <a href="{% url 'cancel_session' session.id %}" class="btn btn-outline-danger btn-sm"><i class="fas fa-times"></i> Cancel</a>
+                        </div>
                     </div>
                 </div>
-            </li>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
     </div>
 
     <!-- Bootstrap JS and dependencies -->
