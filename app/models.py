@@ -228,18 +228,16 @@ def add_experience(request):
     coach = get_coach(coach_id)
     job_title = request.POST['job_title']
     institution_name = request.POST['institution_name']
-    institution_address = request.POST['institution_address']
     date_range = request.POST['date_range']
     description = request.POST['description']
-    experience = Experience.objects.create(coach=coach, job_title=job_title, institution_name=institution_name, institution_address=institution_address,date_range=date_range, description=description)
+    experience = Experience.objects.create(coach=coach, job_title=job_title, institution_name=institution_name,date_range=date_range, description=description)
     return experience
 
 def update_experience(request, experience_id):
     experience = Experience.objects.get(id=experience_id)
 
     experience.job_title = request.POST['job_title']
-    experience.company_name = request.POST['company_name']
-    experience.company_address = request.POST['company_address']
+    experience.institution_name = request.POST['institution_name']
     experience.date_range = request.POST['date_range']
     experience.description = request.POST['description']
     experience.save()
