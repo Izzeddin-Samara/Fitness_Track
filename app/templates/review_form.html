@@ -62,7 +62,16 @@
         <ul class="list-group">
             {% for review in coach.coach_reviews.all %}
             <li class="list-group-item">
-                <p class="mb-1"><strong>{{ review.user.first_name }} {{ review.user.last_name }}</strong>: {{ review.content }} <small class="text-muted">({{ review.updated_at }})</small></p>
+                <p class="mb-1">
+                    <strong>{{ review.user.first_name }} {{ review.user.last_name }}</strong>:
+                    <span class="text-break d-block">{{ review.content }}</span>
+                    <!-- Ensures long reviews break properly -->
+                    <small class="text-muted">{{ review.updated_at|date:"F j, Y, g:i a" }}</small>
+                </p>
+            </li>
+            {% empty %}
+            <li class="list-group-item text-center">
+                No reviews available.
             </li>
             {% endfor %}
         </ul>
