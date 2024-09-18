@@ -273,3 +273,31 @@
     justify-content: flex-end;
     gap: 10px;
 }
+
+.carousel-item {
+    width: 100%; 
+    min-height: 150px; 
+}
+
+.carousel-inner {
+    width: 100%; /
+}
+
+.carousel {
+    width: 100%; 
+}
+
+.carousel-control-prev, 
+.carousel-control-next {
+    width: 5%; 
+}
+
+.carousel-item p {
+    font-size: 1rem; 
+    padding: 10px; 
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto; 
+}
