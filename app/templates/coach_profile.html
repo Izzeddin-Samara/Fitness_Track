@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-</head>
 
 <body class="bg-light">
 
@@ -19,22 +18,21 @@
         <div class="container-custom d-flex justify-content-between align-items-center">
             <h1 class="mb-0">
                 {% if is_coach %}
-                    <a href="{% url 'coach_dashboard' %}" class="header-link text-white">
-                        <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
-                    </a>
+                <a href="{% url 'coach_dashboard' %}" class="header-link">
+                    <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
+                </a>
                 {% elif is_logged_in %}
-                    <a href="{% url 'user_dashboard' %}" class="header-link text-white">
-                        <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
-                    </a>
+                <a href="{% url 'user_dashboard' %}" class="header-link">
+                    <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
+                </a>
                 {% else %}
-                    <a href="/" class="header-link text-white">
-                        <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
-                    </a>
+                <a href="/" class="header-link">
+                    <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
+                </a>
                 {% endif %}
             </h1>
-            
+
             <div class="user-info">
-                <!-- Conditionally show Logout button only for logged-in user or coach -->
                 {% if is_coach or is_logged_in %}
                 <form method="post" action="{% url 'logout_user' %}" class="d-inline">
                     {% csrf_token %}
@@ -46,7 +44,20 @@
             </div>
         </div>
     </header>
-    
+
+    <!-- Notifications Section -->
+    {% if messages %}
+    <div class="alert-messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     <!-- Coach Profile Section -->
     <div class="container profile-card shadow mb-5">
@@ -54,18 +65,15 @@
             <!-- Profile Image and Change Photo Icon -->
             <div class="col-md-4 text-center">
                 <div class="profile-image-container">
-                    <!-- Display Current Profile Image -->
                     {% if coach.image %}
                     <img src="{{ coach.image.url }}" alt="{{ coach.first_name }} {{ coach.last_name }}" class="profile-image img-thumbnail rounded-circle" style="max-width: 150px;">
                     {% else %}
                     <img src="{% static 'assets/img/default-profile.png' %}" alt="Default Profile" class="profile-image img-thumbnail rounded-circle" style="max-width: 150px;">
                     {% endif %}
-                    
-                    <!-- Change Photo Form -->
+
                     {% if is_coach %}
                     <form method="post" action="{% url 'update_image' coach.id %}" enctype="multipart/form-data" id="changePhotoForm">
                         {% csrf_token %}
-                        <!-- Custom file input as icon -->
                         <label for="file-upload" class="camera-icon" style="cursor: pointer;">
                             <i class="fas fa-camera text-primary"></i>
                         </label>
@@ -91,7 +99,9 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h3>Bio</h3>
                 {% if is_coach %}
-                <a href="{% url 'update_bio' coach.id %}" class="btn btn-info btn-sm">Update Bio</a>
+                <a href="{% url 'update_bio' coach.id %}" class="btn btn-outline-secondary btn-sm">
+                    <i class="fas fa-edit"></i> Update Bio
+                </a>
                 {% endif %}
             </div>
             <div class="card-body">
@@ -106,31 +116,60 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h3>Experience</h3>
                 {% if is_coach %}
-                <a href="{% url 'add_experience' coach.id %}" class="btn btn-info btn-sm">Add Experience</a>
+                <a href="{% url 'add_experience' coach.id %}" class="btn btn-outline-secondary btn-sm">
+                    <i class="fas fa-plus"></i> Add Experience
+                </a>
                 {% endif %}
             </div>
             <div class="card-body">
                 {% if coach_experiences %}
                 {% for experience in coach_experiences %}
-                <div class="experience-item mb-4 border-bottom pb-3">
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div>
+                <div class="card mb-4 border-0 shadow-sm">
+                    <div class="card-body">
+                        <!-- Title and Date Range -->
+                        <div class="d-flex justify-content-between">
                             <h5 class="mb-1">{{ experience.job_title }}</h5>
-                            <p class="mb-0 text-muted">{{ experience.company_name }}</p>
-                            <p class="mb-0 text-muted"><small>{{ experience.company_address }}</small></p>
-                            <p class="mt-2">{{ experience.description }}</p>
                             <div class="text-muted"><small>{{ experience.date_range }}</small></div>
                         </div>
-                        <!-- Conditionally show Update and Delete buttons only for the coach -->
+                        <p class="mb-0 text-muted">{{ experience.institution_name }}</p>
+                        <p class="mt-2">{{ experience.description }}</p>
+
+                        <!-- Update and Delete Buttons as Icons -->
                         {% if is_coach %}
-                        <div class="d-flex flex-column">
-                            <a href="{% url 'update_experience' experience.id %}" class="btn btn-sm btn-info mb-1 w-100">Update</a>
-                            <form action="{% url 'delete_experience' experience.id %}" method="post" class="w-100">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-sm btn-danger w-100">Delete</button>
-                            </form>
+                        <div class="d-flex justify-content-end mt-3">
+                            <a href="{% url 'update_experience' experience.id %}" class="btn btn-sm btn-link text-info">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <!-- Button to trigger delete confirmation modal -->
+                            <button type="button" class="btn btn-sm btn-link text-danger" data-toggle="modal" data-target="#confirmDeleteExperienceModal{{ experience.id }}">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
                         </div>
                         {% endif %}
+                    </div>
+                </div>
+
+                <!-- Modal for confirming experience deletion -->
+                <div class="modal fade" id="confirmDeleteExperienceModal{{ experience.id }}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteExperienceModalLabel{{ experience.id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger text-white">
+                                <h5 class="modal-title" id="confirmDeleteExperienceModalLabel{{ experience.id }}">Confirm Action</h5>
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <p>Are you sure you want to delete the experience "{{ experience.job_title }}"?</p>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
+                                <form action="{% url 'delete_experience' experience.id %}" method="post" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Yes! I want to Delete</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
@@ -147,31 +186,59 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h3>Education</h3>
                 {% if is_coach %}
-                <a href="{% url 'add_education' coach.id %}" class="btn btn-info btn-sm">Add Education</a>
+                <a href="{% url 'add_education' coach.id %}" class="btn btn-outline-secondary btn-sm">
+                    <i class="fas fa-plus"></i> Add Education
+                </a>
                 {% endif %}
             </div>
             <div class="card-body">
                 {% if coach_education %}
                 {% for education in coach.coach_educations.all %}
-                <div class="education-item mb-4 border-bottom pb-3">
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div>
-                            <h5 class="mb-1">{{ education.degree }}</h5>
-                            <p class="mb-0 text-muted"><strong>Field of Study:</strong> {{ education.field_of_study }}</p>
-                            <p class="mb-0 text-muted"><strong>Institution:</strong> {{ education.university }}</p>
-                            <p class="mb-0 text-muted"><strong>Date Range:</strong> {{ education.date_range }}</p>
-                            <p class="mt-2">{{ education.university_location }}</p>
+                <div class="card mb-4 border-0 shadow-sm">
+                    <div class="card-body">
+                        <!-- Field of Study and Date Range -->
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-1">{{ education.field_of_study }} ({{ education.degree }})</h5>
+                            <div class="text-muted"><small>{{ education.date_range }}</small></div>
                         </div>
-                        <!-- Conditionally show Update and Delete buttons only for the coach -->
+                        <p class="mb-0 text-muted">{{ education.university_name }}</p>
+
+                        <!-- Update and Delete Buttons as Icons -->
                         {% if is_coach %}
-                        <div class="d-flex flex-column">
-                            <a href="{% url 'update_education' education.id %}" class="btn btn-sm btn-info mb-1 w-100">Update</a>
-                            <form action="{% url 'delete_education' education.id %}" method="post" class="w-100">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-sm btn-danger w-100">Delete</button>
-                            </form>
+                        <div class="d-flex justify-content-end mt-3">
+                            <a href="{% url 'update_education' education.id %}" class="btn btn-sm btn-link text-info">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <!-- Button to trigger delete confirmation modal -->
+                            <button type="button" class="btn btn-sm btn-link text-danger" data-toggle="modal" data-target="#confirmDeleteEducationModal{{ education.id }}">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
                         </div>
                         {% endif %}
+                    </div>
+                </div>
+
+                <!-- Modal for confirming education deletion -->
+                <div class="modal fade" id="confirmDeleteEducationModal{{ education.id }}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteEducationModalLabel{{ education.id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger text-white">
+                                <h5 class="modal-title" id="confirmDeleteEducationModalLabel{{ education.id }}">Confirm Action</h5>
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <p>Are you sure you want to delete the education "{{ education.field_of_study }} ({{ education.degree }})"?</p>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
+                                <form action="{% url 'delete_education' education.id %}" method="post" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Yes! I want to Delete</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
@@ -182,6 +249,9 @@
         </div>
     </section>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
