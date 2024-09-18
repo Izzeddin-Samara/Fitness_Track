@@ -38,10 +38,10 @@
             <div class="row">
                 {% for coach in coaches %}
                 <div class="col-md-4 mb-3">
-                    <div class="card h-100">
+                    <div class="card h-100 text-center">
+                        <img src="{{ coach.image.url }}" class="card-img-top img-fluid" alt="{{ coach.first_name }} {{ coach.last_name }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ coach.first_name }} {{ coach.last_name }}</h5>
-                            <p class="card-text">{{ coach.bio }}</p>
                         </div>
                         <div class="card-footer text-center">
                             <a href="{% url 'create_session' coach.id %}" class="btn btn-success btn-sm">
