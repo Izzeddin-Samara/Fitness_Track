@@ -23,6 +23,7 @@
     background-color: #ed563b;
     color: #ffffff;
     border: none;
+    margin-bottom: 15px; /* Increased margin between Log In and Create New Account */
 }
 
 #custom-orange-btn:hover {
@@ -211,9 +212,7 @@ h1.display-4 .custom-orange-text {
     text-decoration: none;
 }
 
-.header-link *,
-.header-link:visited,
-.header-link:link {
+.header-link * {
     text-decoration: none;
     outline: none;
 }
@@ -319,4 +318,46 @@ h1.display-4 .custom-orange-text {
 
 #by {
     font-size: 0.80em;
+}
+
+#join {
+    margin-top: 10px; /* Space between buttons */
+    text-align: center;
+    font-weight: bold;
+}
+
+#no-underline {
+    text-decoration: none;
+    margin: 0 auto;
+    display: block;
+    max-width: 350px;
+}
+
+.login-form {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+/* Error Message and Form Container */
+.error-message {
+    position: absolute;
+    top: 130px; /* Adjust to place the message right above the form fields */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 5px 10px;
+    font-size: 1.0rem;
+    border-radius: 5px;
+    border: 1px solid #f5c6cb;
+}
+
+.form-container {
+    position: relative; /* This allows positioning inside the form */
 }

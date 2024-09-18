@@ -20,30 +20,25 @@
             </div>
             <div class="col-md-6 bg-white p-5">
                 <!-- Dropdown to toggle forms -->
-                <div class="select-container">
+                <div class="select-container mb-4">
                     <label for="form-select" class="form-label">Select Login Type</label>
                     <select class="custom-select" id="form-select" onchange="showForm(this.value)">
                         <option value="user" selected>User</option>
                         <option value="coach">Coach</option>
                         <option value="admin">Admin</option>
                     </select>
-
-                    <!-- Display message as an inline sentence with absolute positioning -->
-                    {% if messages %}
-                    <div class="container mt-3">
-                        {% for message in messages %}
-                        {% if 'login' in message.tags %}
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                    {% endif %}
                 </div>
+
+                <!-- Display error message as a small, centered line -->
+                {% if messages %}
+                <div class="error-message">
+                    {% for message in messages %}
+                    {% if 'login' in message.tags %}
+                    <small class="text-danger">{{ message }}</small>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
 
                 <!-- User Login Form -->
                 <form id="user-form" class="login-form active" method="post" action="{% url 'login_user' %}">
@@ -52,55 +47,50 @@
                         <input type="email" class="form-control" name="email" placeholder="User Email address" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="User Password"
-                            required>
+                        <input type="password" class="form-control" name="password" placeholder="User Password" required>
                     </div>
                     <button type="submit" id="custom-orange-btn" class="btn btn-block">Log In as User</button>
                 </form>
 
-                <!-- Coach Login Form -->
-                <form id="coach-form" class="login-form" method="post" action="{% url 'login_coach' %}">
+                <!-- Other Forms (Coach, Admin) - Hidden by default -->
+                <form id="coach-form" class="login-form" method="post" action="{% url 'login_coach' %}" style="display:none;">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="Coach Email address"
-                            required>
+                        <input type="email" class="form-control" name="email" placeholder="Coach Email address" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Coach Password"
-                            required>
+                        <input type="password" class="form-control" name="password" placeholder="Coach Password" required>
                     </div>
                     <button type="submit" id="custom-orange-btn" class="btn btn-block">Log In as Coach</button>
                 </form>
 
-                <!-- Admin Login Form -->
-                <form id="admin-form" class="login-form" method="post" action="{% url 'login_admin' %}">
+                <form id="admin-form" class="login-form" method="post" action="{% url 'login_admin' %}" style="display:none;">
                     {% csrf_token %}
                     <div class="form-group">
                         <input type="text" class="form-control" name="username" placeholder="Admin Username" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Admin Password"
-                            required>
+                        <input type="password" class="form-control" name="password" placeholder="Admin Password" required>
                     </div>
                     <button type="submit" id="custom-orange-btn" class="btn btn-block">Log In as Admin</button>
                 </form>
+
+                <!-- Break line between the login and other actions -->
+                <hr style="margin-bottom: 30px;">
+
+                <!-- Create New Account Button -->
                 <a href="/register" class="btn btn-secondary btn-block" id="no-underline">Create New Account</a>
-                <p class="join"><a href="/coach_application">Join us as a Coach</a></p>
+
+                <!-- Join as a Coach Link -->
+                <p id="join"><a href="/coach_application">Join us as a Coach</a></p>
             </div>
-
-
-
         </div>
     </div>
-    </div>
-
-
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'assets/js/script.js' %}"></script>
-
 
 </body>
 
