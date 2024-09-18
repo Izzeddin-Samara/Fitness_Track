@@ -1,3 +1,4 @@
+/* Button Group Adjustments */
 .btn-group > .btn {
     margin-right: 5px;
 }
@@ -6,6 +7,7 @@
     margin-right: 0;
 }
 
+/* Custom Orange Text */
 #custom-orange-text {
     color: orangered;
     font-weight: bold;
@@ -16,6 +18,7 @@
     color: orangered;
 }
 
+/* Custom Orange Button */
 #custom-orange-btn {
     background-color: #ed563b;
     color: #ffffff;
@@ -27,6 +30,7 @@
     color: #ffffff;
 }
 
+/* Header Text Styles */
 #header-fitness {
     color: white;
     font-weight: bold;
@@ -37,6 +41,7 @@
     font-weight: bold;
 }
 
+/* Background and Text Color Customization */
 .header-background {
     background-color: rgb(176, 176, 176);
 }
@@ -69,6 +74,7 @@ a:hover {
     color: #8a2be2;
 }
 
+/* Custom Backgrounds and Colors */
 .bg-dark {
     background-color: #6c757d !important;
 }
@@ -77,6 +83,7 @@ a:hover {
     color: #ffffff !important;
 }
 
+/* Button Customization */
 #orange {
     background-color: orangered;
     border: solid orangered;
@@ -95,6 +102,7 @@ a:hover {
     color: white;
 }
 
+/* Header and Title Styles */
 h1.display-4 {
     color: #ffffff;
     font-weight: bold;
@@ -113,6 +121,7 @@ h1.display-4 .custom-orange-text {
     color: #d94c35;
 }
 
+/* Responsive Media Queries Adjustments */
 @media (max-width: 1200px) {
     .container {
         max-width: 1000px;
@@ -140,15 +149,13 @@ h1.display-4 .custom-orange-text {
     }
 
     .header h1 {
-        font-size: 20px;
+        font-size: 22px; /* Better readability */
+        margin-bottom: 10px;
     }
 
-    .header .user-info span {
-        font-size: 16px;
-    }
-
+    .header .user-info span,
     .header .logout-button {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     section h2 {
@@ -158,8 +165,14 @@ h1.display-4 .custom-orange-text {
     button {
         font-size: 14px;
     }
+
+    .btn, .form-control {
+        width: 90%; /* Consistent width */
+        margin: 10px auto; /* Centered on mobile */
+    }
 }
 
+/* Button Color Adjustments */
 .btn-success {
     background-color: #007bff;
     border-color: #007bff;
@@ -182,10 +195,12 @@ h1.display-4 .custom-orange-text {
     border-color: #bd2130;
 }
 
+/* Card Row Alignment */
 .session-card .row {
     align-items: center;
 }
 
+/* Header Links */
 .header-link {
     text-decoration: none;
     display: inline-block;
@@ -203,6 +218,7 @@ h1.display-4 .custom-orange-text {
     outline: none;
 }
 
+/* Custom Alerts */
 #custom-alert-create {
     background-color: #d4edda;
     color: #155724;
@@ -230,12 +246,16 @@ h1.display-4 .custom-orange-text {
     border-radius: 4px;
 }
 
+/* Name Font Size */
 #name {
     font-size: xx-large;
 }
 
+/* Form and Alert Containers */
 .form-container, .alert {
-    max-width: 100%;
+    width: 100%; /* Use full width */
+    padding: 15px; /* Added padding */
+    margin-bottom: 20px; /* Margin between elements */
 }
 
 .alert-danger {
@@ -243,46 +263,60 @@ h1.display-4 .custom-orange-text {
     max-width: 100%;
 }
 
+/* Main Container Adjustments */
 .main-container {
-    transform: translateX(-200px);
+    margin: 0 auto; /* Center alignment */
 }
 
 .message-container,
 #message-container {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    max-width: 250px;
-}
-
-.signup-form {
-    position: relative;
-    width: 100%;
-}
-
-.alert {
+    position: fixed; /* Fixed positioning */
+    right: 10px;
+    top: 10px;
+    max-width: 300px; /* Limit width */
+    padding: 15px;
     margin-bottom: 10px;
 }
 
+.is-invalid {
+    border-color: red;
+}
+
+.is-valid {
+    border-color: green;
+}
+
+.invalid-feedback {
+    color: red;
+    font-size: 0.85em;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.valid-feedback {
+    color: green;
+    font-size: 0.85em;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.signup-form {
+    width: 100%;
+    max-width: 350px; /* Reduced width for form */
+    margin: 0 auto;
+}
+
 #by {
-    font-size: small;
-}
-
-#main-container {
-    transform: translateX(-30px);
-}
-
-.card-title {
-    color: #ff4500;
-}
-
-#no-underline {
-    text-decoration: none;
-    margin-top: 20px;
-}
-.join {
-    margin-top: 30px;
-    text-align: center;
-    font-weight: bolder;
+    font-size: 0.80em;
 }
