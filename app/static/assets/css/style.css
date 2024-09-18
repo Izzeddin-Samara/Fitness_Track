@@ -246,3 +246,30 @@
     position: relative; /* Ensures the alert is positioned relative to this container */
     padding-top: 60px; /* Adds some space for the alert to appear without pushing the form down */
 }
+
+.alert-messages {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    z-index: 1050;
+    margin: 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alert .close {
+    color: #000;
+}
+
+.profile-image-container:hover .profile-image {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.btn-action-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
