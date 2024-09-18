@@ -50,19 +50,54 @@
             <div class="col-md-6 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Review for Coach {{ review.coach.first_name }} {{ review.coach.last_name }}</h5>
+                        <h5 class="card-title">Review for Coach {{ review.coach.first_name }} {{ review.coach.last_name}}</h5>
                         <p class="card-text">{{ review.content }}</p>
                         <p class="text-muted">Last updated on {{ review.updated_at }}</p>
                     </div>
                     <div class="card-footer text-right">
-                        <a href="{% url 'update_review' review.id %}" class="btn btn-info btn-sm">Update</a>
-                        <a href="{% url 'delete_review' review.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="{% url 'update_review' review.id %}" class="btn btn-info btn-sm">
+                            <i class="fas fa-edit"></i> Update
+                        </a>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                            data-target="#confirmDeleteModal{{ review.id }}">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for confirmation -->
+            <div class="modal fade" id="confirmDeleteModal{{ review.id }}" tabindex="-1" role="dialog"
+                aria-labelledby="confirmDeleteModalLabel{{ review.id }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-danger text-white">
+                            <h5 class="modal-title" id="confirmDeleteModalLabel{{ review.id }}">Confirm Action</h5>
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <p>Are you sure you want to delete your review for {{ review.coach.first_name }} {{ review.coach.last_name }}?</p>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
+                            <form action="{% url 'delete_review' review.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Yes! I want to Delete</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
-    
+
+    <!-- Bootstrap JavaScript dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
