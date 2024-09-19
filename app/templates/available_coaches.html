@@ -44,7 +44,7 @@
                             <h5 class="card-title">{{ coach.first_name }} {{ coach.last_name }}</h5>
                         </div>
                         <div class="card-footer text-center">
-                            <a href="{% url 'create_session' coach.id %}" class="btn btn-success btn-sm">
+                            <a href="{% url 'create_session' coach.id %}" class="btn btn-primary btn-sm">
                                 Book Session <i class="fas fa-calendar-plus"></i>
                             </a>
                             <a href="{% url 'create_review' coach.id %}" class="btn btn-secondary btn-sm">
