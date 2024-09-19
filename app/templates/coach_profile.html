@@ -22,7 +22,7 @@
                     <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
                 </a>
                 {% elif is_logged_in %}
-                <a href="{% url 'user_dashboard' %}" class="header-link">
+                <a href="{% url 'available_coaches' %}" class="header-link">
                     <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
                 </a>
                 {% else %}
@@ -160,7 +160,7 @@
                                 </button>
                             </div>
                             <div class="modal-body text-center">
-                                <p>Are you sure you want to delete the experience "{{ experience.job_title }}"?</p>
+                                <p>Are you sure you want to delete the experience <strong>"{{ experience.job_title }}"</strong>?</p>
                             </div>
                             <div class="modal-footer d-flex justify-content-center">
                                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
