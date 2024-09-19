@@ -47,11 +47,12 @@
 
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1>Your Upcoming Sessions</h1>
-            <a href="/available_coaches" class="btn btn-success btn-sm">Book a new session</a>
+            <h3>Your Upcoming Sessions</h3>
+            <a href="/available_coaches" class="btn btn-primary btn-sm">Book a new session</a>
         </div>
 
         <div class="row">
+            {% if user.user_sessions.all %}
             {% for session in user.user_sessions.all %}
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
@@ -95,6 +96,9 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <p class="text-muted" style="margin-left: 17px;">You have no sessions booked at the moment.</p>
+            {% endif %}
         </div>
     </div>
 
