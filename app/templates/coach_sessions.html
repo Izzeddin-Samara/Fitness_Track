@@ -39,25 +39,27 @@
 
         <div class="row">
             {% for session in coach.coach_sessions.all %}
-            <div class="col-md-6 mb-4">
+            <div class="col-md-5 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title"><strong>{{ session.date }} - {{ session.duration }}</strong></h5>
+                        <h5 class="card-title">
+                            <i class="fas fa-calendar-alt"></i> Session with {{ session.user.first_name }} {{ session.user.last_name }}
+                        </h5>
                         <p class="card-text">
-                            <strong>Client:</strong> {{ session.user.first_name }} {{ session.user.last_name }}<br>
-                            <strong>Time:</strong> {{ session.duration}} <br>
-                            <strong> Date</strong> {{ session.date }} <br>
-                            <strong>Location:</strong> {{ session.place}}
+                            <i class="fas fa-clock"></i> <strong>Time:</strong> {{ session.duration }} <br>
+                            <i class="fas fa-calendar"></i> <strong>Date:</strong> {{ session.date }} <br>
+                            <i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> {{ session.place }}
                         </p>
                     </div>
                 </div>
             </div>
+            
             {% endfor %}
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
