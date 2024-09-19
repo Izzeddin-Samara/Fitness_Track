@@ -42,10 +42,11 @@
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title"><strong>{{ review.user.first_name }} {{ review.user.last_name }}</strong></h5>
-                        <p class="card-text">
-                            {{ review.content }} <br>
-                        </p>
+                        <div class="mb-3">
+                            <h5 class="card-title mb-0"><strong>{{ review.user.first_name }} {{ review.user.last_name }}</strong></h5>
+                            <small class="text-muted">{{ review.updated_at}}</small>
+                        </div>
+                        <p class="card-text">{{ review.content }}</p>
                     </div>
                 </div>
             </div>
