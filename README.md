@@ -25,24 +25,24 @@ FitnessTrack is a professional web application designed to connect users with ce
 
 - :envelope_with_arrow: **Contact Form for Inquiries**: Users can use a contact form to reach out for support, ask questions, or provide feedback.
 
-## Technology Stack
+## :hammer_and_wrench: Technology Stack
 
-- **Python & Django**: Used for backend development to handle user authentication, session bookings, review systems, and overall data management. Django’s robust framework allows for secure and scalable development, ensuring smooth management of users and coaches.
+- ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=FFD43B) & ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white): Used for backend development to handle user authentication, session bookings, review systems, and overall data management. Django’s robust framework allows for secure and scalable development, ensuring smooth management of users and coaches.
 
-- **MySQL**: Chosen as the database to efficiently store and manage data related to users, coaches, sessions, and reviews. It ensures data integrity and supports complex queries needed for the booking and review systems.
+- ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white): Chosen as the database to efficiently store and manage data related to users, coaches, sessions, and reviews. It ensures data integrity and supports complex queries needed for the booking and review systems.
 
-- **JavaScript**: Used to create interactive elements on the frontend, such as toggling visibility of content, managing dynamic user interactions, and improving navigation.
+- ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black): Used to create interactive elements on the frontend, such as toggling visibility of content, managing dynamic user interactions, improving navigation, and performing client-side validation using Vanilla JavaScript to ensure forms are properly filled out before submission.
 
-- **jQuery**: A lightweight JavaScript library used to add interactivity to the frontend, such as providing real-time feedback for password matching during registration and enhancing user interface elements like toggling content visibility or other dynamic interactions.
+-  ![jQuery](https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white): A lightweight JavaScript library used to add interactivity to the frontend. Enhancing user interface elements like toggling content visibility.
 
-- **HTML & CSS**: Core technologies for structuring and styling the frontend, ensuring a clean, responsive design that enhances user experience across all devices.
+- ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) & ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white): Core technologies for structuring and styling the frontend, ensuring a clean, responsive design that enhances user experience across all devices.
 
-- **Bootstrap**: A front-end framework that ensures the platform is mobile-friendly and visually consistent, providing a responsive design for all pages.
+- ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white): A front-end framework that ensures the platform is mobile-friendly and visually consistent, providing a responsive design for all pages.
 
-- **Jazzmin**: Customizes the Django admin interface, providing a modern and intuitive dashboard for admins to manage the platform effectively.
+- ![Jazzmin](https://img.shields.io/badge/Jazzmin-FF69B4?style=for-the-badge&logo=django&logoColor=white): Customizes the Django admin interface, providing a modern and intuitive dashboard for admins to manage the platform effectively.
 
-- **Mailjet**: Integrated for sending automated emails to users and coaches for session bookings, updates, and cancellations to ensure everyone stays informed.
+- ![Mailjet](https://img.shields.io/badge/Mailjet-FF6F61?style=for-the-badge&logo=mailjet&logoColor=white): Integrated for sending automated emails to users and coaches for session bookings, updates, and cancellations to ensure everyone stays informed.
 
-- **Git**: Used for version control, managing code changes, and keeping the development process organized and efficient.
+- ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white): Used for version control, managing code changes, and keeping the development process organized and efficient.
 
 
