@@ -14,6 +14,8 @@
     /* Adjust margin for spacing */
     position: relative;
     /* For positioning message */
+    max-width: 350px;
+    margin: 0 auto;
 }
 
 .custom-select {
@@ -46,7 +48,6 @@
     /* Bootstrap danger color for consistency */
     font-size: 0.9rem;
     /* Slightly smaller font size */
-    padding: 3px 8px;
     /* Padding for better visibility */
     background-color: #f8d7da;
     /* Light red background to match Bootstrap's 'danger' alert */
@@ -181,12 +182,12 @@
     display: inline-block;
 }
 .camera-icon {
-    position: absolute;
-    top: 0;  /* Position at the top */
+    position: relative;
+    bottom: 1px;  /* Position at the top */
     transform: translate(30%, -30%);  /* Adjust position to appear correctly on the edge */
-    background-color: white;
     border-radius: 50%;
     padding: 5px;
+    width: 10px;
 }
 .profile-info-container {
     display: flex;
@@ -301,3 +302,5 @@
     width: 100%;
     height: auto; 
 }
+
+
