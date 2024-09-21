@@ -302,8 +302,9 @@
     width: 100%;
     height: auto; 
 }
-.form-group {
-    width: 400px;
+
+.session_form .form-group {
+    max-width: 400px;
 }
 
 
