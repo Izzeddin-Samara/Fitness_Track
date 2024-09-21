@@ -141,7 +141,7 @@ def create_session(request, coach_id):
             fail_silently=False,
         )
         messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} booked successfully, session details have been sent to your email", extra_tags='success')
-        return redirect('/upcoming_sessions')
+        return redirect('/user_sessions')
 
     
     return render(request, 'session_form.html', {'user': user, 'coach': coach, 'coach_id': coach_id, 'min_date': min_date})
@@ -176,7 +176,7 @@ def update_session(request, session_id):
             fail_silently=False,
         )
         messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
-        return redirect('/upcoming_sessions')
+        return redirect('/user_sessions')
     else:
         return render(request, 'update_session.html', {'user': user, 'session': session, 'coach': coach, 'min_date': min_date})
 
@@ -213,7 +213,7 @@ def cancel_session(request, session_id):
         extra_tags='success'
     )
 
-    return redirect('/upcoming_sessions')
+    return redirect('/user_sessions')
 
 
 def create_review(request, coach_id):
@@ -281,12 +281,12 @@ def terms(request):
 def privacy_policy(request):
     return render(request, 'privacy_policy.html')
 
-def upcoming_sessions(request):
+def user_sessions(request):
     if 'userid' in request.session:
         user_id = request.session['userid']
         user = models.get_user(user_id)
         user_sessions = models.get_sessions_by_user(user_id)
-        return render(request, 'upcoming_sessions.html', {'user': user, 'user_sessions': user_sessions})
+        return render(request, 'user_sessions.html', {'user': user, 'user_sessions': user_sessions})
 
 def user_reviews(request):
     if 'userid' in request.session:
