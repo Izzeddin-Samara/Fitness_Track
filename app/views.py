@@ -505,13 +505,8 @@ def add_education(request, coach_id):
     
     if request.method == 'POST':
         models.add_education(request)
+        messages.success(request, f"Education Added successfully.", extra_tags='success')
         return redirect('coach_profile', coach_id=coach_id)
-    
-    context = {
-        'coach': coach
-    }
-    
-    return render(request, "education_form.html", context)
 
 def update_education(request, education_id):
     if 'coach_id' not in request.session:
@@ -526,7 +521,7 @@ def update_education(request, education_id):
 
     if request.method == 'POST':
         models.update_education(request, education_id)
-        messages.success(request, f"Education for coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
+        messages.success(request, f"Education updated successfully.", extra_tags='info')
         return redirect('coach_profile', coach_id=logged_in_coach_id)
     else:
         return render(request, 'update_education.html', {'education': education, 'coach': coach, 'coach_id': logged_in_coach_id})
@@ -548,7 +543,7 @@ def delete_education(request, education_id):
 
     
     models.delete_education(education_id)
-    messages.success(request, "Education deleted successfully.")
+    messages.success(request, "Education deleted successfully.", extra_tags='success')
     
     
     return redirect('coach_profile', coach_id=logged_in_coach_id)
