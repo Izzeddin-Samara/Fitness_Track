@@ -45,16 +45,16 @@
     {% endif %}
 
     <div class="container">
-        <h1 class="mb-4">Your Recent Reviews</h1>
+        <h2 class="mb-4">Your Recent Reviews</h2>
         <div class="row">
             {% if user.user_reviews.all %}
             {% for review in user.user_reviews.all %}
             <div class="col-md-6 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Review for Coach {{ review.coach.first_name }} {{ review.coach.last_name }}</h5>
+                        <h5 class="card-title"><strong>Review for Coach {{ review.coach.first_name }} {{ review.coach.last_name }}</strong></h5>
                         <p class="card-text">{{ review.content }}</p>
-                        <p class="text-muted">Last updated on {{ review.updated_at }}</p>
+                        <p class="text-muted"><small>{{ review.updated_at }}</small></p>
                     </div>
                     <div class="card-footer text-right">
                         <a href="{% url 'update_review' review.id %}" class="btn btn-info btn-sm">
