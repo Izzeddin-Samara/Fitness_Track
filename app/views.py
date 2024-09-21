@@ -561,7 +561,7 @@ def update_bio(request, coach_id):
 
     if request.method == 'POST':
         models.update_bio(request, coach_id)
-        messages.success(request, f"Bio for coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
+        messages.success(request, "Bio updated successfully.", extra_tags='info')
         return redirect('coach_profile', coach_id=logged_in_coach_id)
     else:
         return render(request, 'update_bio.html', {'coach': coach, 'coach_id': logged_in_coach_id})
