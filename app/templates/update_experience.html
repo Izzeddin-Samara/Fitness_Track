@@ -56,16 +56,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="institution_address"><i class="fas fa-map-marker-alt"></i> Institution Address</label>
-                        <input type="text" class="form-control" id="institution_address" name="institution_address" placeholder="Enter institution address" value="{{exercise.institution_address}}" required>
-                        <div class="invalid-feedback">Please enter an institution address.</div>
-                    </div>
-
-                    <div class="form-group">
                         <label for="date_range"><i class="fas fa-calendar-alt"></i> Date Range</label>
                         <input type="text" class="form-control" id="date_range" name="date_range" placeholder="e.g., Jan 2020 - Dec 2022" value="{{experience.date_range}}" required>
                         <div class="invalid-feedback">Please enter a date range.</div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="description"><i class="fas fa-align-left"></i> Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" placeholder="Describe your experience..."  required>{{ experience.description }}</textarea>
+                        <div class="invalid-feedback">Please provide a description.</div>
+                    </div>
+
 
 
                     <button type="submit" class="btn btn-info"><i class="fas fa-save"></i> Save Experience</button>
