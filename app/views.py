@@ -359,30 +359,55 @@ def send_admin_email(contact):
     )
     email.send()
 
+MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB in bytes
+
+
+ALLOWED_FILE_TYPES = [
+    'application/pdf',  # PDF files
+    'image/jpeg',       # JPEG image files
+    'application/msword',  # DOC files
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'  # DOCX files
+]
+
 def coach_application(request):
     if request.method == 'POST':
-        # Call the model function with POST and FILES data
         application = models.submit_application(request.POST, request.FILES)
 
-        # Prepare the email
-        email = EmailMessage(
+        # Prepare the email for the admin
+        admin_email = EmailMessage(
             subject='New Coach Application Received',
             body=f"New coach application submitted by {request.POST.get('first_name')} {request.POST.get('last_name')}. Please find the attached documents.",
-            from_email=settings.DEFAULT_FROM_EMAIL,  # Ensure you have set this in your settings
-            to=['izzidinsamara@gmail.com'],  # Replace with your email
+            from_email=os.environ.get('DEFAULT_FROM_EMAIL'),  
+            to=[os.environ.get('DEFAULT_FROM_EMAIL')],  
         )
 
-        # Attach files to the email
-        for file in request.FILES.values():
-            email.attach(file.name, file.read(), file.content_type)
+        skipped_files = []
+        for file_key, file in request.FILES.items():
+            if file.size > MAX_FILE_SIZE or file.content_type not in ALLOWED_FILE_TYPES:
+                skipped_files.append(file.name)
+                continue
 
-        # Send the email
-        email.send()
+            file.seek(0)
+            file_content = file.read()
+            if file_content:
+                admin_email.attach(file.name, file_content, file.content_type)
 
-        # Render success template
-        return render(request, 'success.html', {'application': application})
+        if admin_email.attachments:
+            admin_email.send()
+
+        # Prepare the email for the applicant
+        applicant_email = EmailMessage(
+            subject='Your Coach Application Has Been Submitted',
+            body=f"Dear {request.POST.get('first_name')},\n\nThank you for submitting your application as a coach. We have received your application and will review it soon.\n\nBest regards,\nFitnessTrack Team",
+            from_email=os.environ.get('DEFAULT_FROM_EMAIL'),
+            to=[request.POST.get('email')],
+        )
+
+        applicant_email.send()
+
+        return render(request, 'application_submitted.html', {'application': application})
+
     else:
-        # In case of a GET request, render the application form
         return render(request, 'coach_application.html')
 
 
