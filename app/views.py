@@ -140,7 +140,7 @@ def create_session(request, coach_id):
         send_mail(
             'Session Created Successfully',
             f'Your session with coach {coach.first_name} {coach.last_name} on {session.date} at {session.duration} has been successfully booked.',
-            'izzidinsamara@gmail.com',  
+            os.environ.get('DEFAULT_FROM_EMAIL'),  
             [session.user.email], 
             fail_silently=False,
         )
@@ -148,7 +148,7 @@ def create_session(request, coach_id):
         send_mail(
             'New Session Booked',
             f'A new session has been booked by {user.first_name} {user.last_name} on {session.date} at {session.duration}. Please check your dashboard for more details.',
-            'izzidinsamara@gmail.com',
+            os.environ.get('DEFAULT_FROM_EMAIL'),
             [session.coach.email], 
             fail_silently=False,
         )
@@ -175,8 +175,8 @@ def update_session(request, session_id):
         
         send_mail(
             'Session Updated Successfully',
-            f'Your session with coach {coach.first_name} {coach.last_name} has been updated to be on {session.date} at {session.duration} at {session.place} .',
-            'izzidinsamara@gmail.com',
+            f'Your session with coach {coach.first_name} {coach.last_name} has been updated to be on {session.date} at {session.duration} at {session.place}.',
+            os.environ.get('DEFAULT_FROM_EMAIL'),
             [session.user.email],
             fail_silently=False,
         )
@@ -184,8 +184,8 @@ def update_session(request, session_id):
         send_mail(
             'Session Updated',
             f'The session booked by {user.first_name} {user.last_name} has been updated to be on {session.date} at {session.duration} at {session.place}. Please check your dashboard for more details.',
-            'izzidinsamara@gmail.com',
-            [session.coach.email],  # Only coach email
+            os.environ.get('DEFAULT_FROM_EMAIL'),
+            [session.coach.email],
             fail_silently=False,
         )
         messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
@@ -209,7 +209,7 @@ def cancel_session(request, session_id):
     send_mail(
         'Session Deleted Successfully',
         f'Your session with coach {coach.first_name} {coach.last_name} on {session.date} at {session.duration} has been successfully cancelled.',
-        'izzidinsamara@gmail.com',
+        os.environ.get('DEFAULT_FROM_EMAIL'),
         [session.user.email],
         fail_silently=False,
     )
@@ -217,8 +217,8 @@ def cancel_session(request, session_id):
     send_mail(
         'Session Cancelled',
         f'The session booked by {user.first_name} {user.last_name} on {session.date} at {session.duration} has been cancelled.',
-        'izzidinsamara@gmail.com',
-        [session.coach.email],  # Only coach email
+        os.environ.get('DEFAULT_FROM_EMAIL'),
+        [session.coach.email],
         fail_silently=False,
     )
 
@@ -229,6 +229,7 @@ def cancel_session(request, session_id):
     )
 
     return redirect('/user_sessions')
+
 
 # Handles the creation of a new review for a coach.
 # Allows users to submit a review and ensures that duplicate reviews are not allowed.
