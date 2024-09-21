@@ -430,6 +430,7 @@ def coach_profile(request, coach_id):
         'is_logged_in': is_logged_in,
     })
 
+
 def add_experience(request, coach_id):
     if 'coach_id' not in request.session:
         return redirect('login')
@@ -442,6 +443,7 @@ def add_experience(request, coach_id):
     
     if request.method == 'POST':
         models.add_experience(request)
+        messages.success(request, f"Experience Added successfully.", extra_tags='success')
         return redirect('coach_profile', coach_id=coach_id)
     
     context = {
@@ -463,7 +465,7 @@ def update_experience(request, experience_id):
 
     if request.method == 'POST':
         models.update_experience(request, experience_id)
-        messages.success(request, f"Experience for coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
+        messages.success(request, f"Experience updated successfully.", extra_tags='info')
         return redirect('coach_profile', coach_id=logged_in_coach_id)
     else:
         return render(request, 'update_experience.html', {'experience': experience, 'coach': coach, 'coach_id': logged_in_coach_id})
@@ -481,7 +483,7 @@ def delete_experience(request, experience_id):
 
     
     if logged_in_coach_id != coach.id:
-        messages.error(request, "You are not authorized to delete this experience.")
+        messages.error(request, "You are not authorized to delete this experience.", extra_tags='success')
         return redirect('coach_profile', coach_id=logged_in_coach_id)  
 
     
