@@ -45,4 +45,88 @@ FitnessTrack is a professional web application designed to connect users with ce
 
 - ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white): Used for version control, managing code changes, and keeping the development process organized and efficient.
 
+## :wrench: Installation
+
+To get started with the FitnessTrack project, follow these steps:
+
+1. :arrow_down: **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/Izzeddin-Samara/Fitness_Track.git
+
+2. :file_folder: **Navigate to the project directory:**
+
+   ```bash
+   cd Fitness_Track
+
+3. :package: **Create a virtual environment:**
+
+   ```bash
+   python -m venv env
+4. :key: **Activate the virtual environment:**
+   - On Windows
+      ```bash
+      call env\Scripts\activate
+     
+    - On MacOS/Linux
+      ```bash
+      source env/bin/activate
+      
+6. :arrow_up: **Install the required packages:**
+   ```bash
+   pip install -r requirements.txt
+
+7. 💾 **Set Up MySQL Database:**
+
+   To set up the MySQL database for the FitnessTrack project, follow the steps below. You can use MySQL Workbench, a graphical interface for managing MySQL databases.
+
+   1. **Download and Install MySQL Workbench:**
+      - If you haven't already, download and install MySQL Workbench from the [official website](https://dev.mysql.com/downloads/workbench/).
+
+   2. **Create a New Database:**
+   - Open MySQL Workbench and connect to your MySQL server.
+   - In the **Navigator** pane, right-click on **Schemas** and select **Create Schema**.
+   - Name the new schema `fitnesstrack` and click **Apply**.
+   - Alternatively, you can run the following command in the MySQL Query window:
+     ```sql
+     CREATE DATABASE fitnesstrack;
+     ```
+     
+   3. **Update `settings.py` file:**
+   - Configure the database settings in `settings.py` file with the following:
+     ```python
+     DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.mysql',
+           'NAME': 'fitnesstrack', # The name of your database.
+           'USER': 'your_mysql_username', # Your MySQL username.
+           'PASSWORD': 'your_mysql_password', # Your MySQL password.
+           'HOST': 'localhost', # The host where your MySQL database is running. Use 'localhost' if it's on your local machine.
+           'PORT': '3306',  The port your MySQL server is running on. 3306 is the default MySQL port.
+         }
+     }
+     ```
+   **Notes:**
+
+   - Ensure that your MySQL server is running, and you have the correct credentials (`your_mysql_username` and `your_mysql_password`) to access the database.
+   - The database name (`fitnesstrack`) can be changed, but make sure it matches the name you set in your `settings.py`.
+
+7. :rocket: **Run migrations to set up the database:**
+     ```bash
+     python manage.py makemigrations
+     python manage.py migrate
+8. :busts_in_silhouette: **Create a superuser:**
+    - **Why?** Creating a superuser account is essential for accessing the Django admin interface, where you can manage the application's data and settings.
+    - **How?** Run the following command
+     ```bash
+     python manage.py createsuperuser
+     ```
+     - **Next Steps:** Once created, you can log in through the login page at http://127.0.0.1:8000/login. Select 'Admin' from the dropdown menu to access administrative functionalities.
+10. :computer: **Run the development server:**
+     ```bash
+     python manage.py runserver
+11. :globe_with_meridians: **Open your browser and navigate to:**
+      
+      http://127.0.0.1:8000/
+
 
