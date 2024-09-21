@@ -1,3 +1,14 @@
+/* Import the font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+/* Apply the font globally to the body */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+
 /* Button Group Adjustments */
 .btn-group > .btn {
     margin-right: 5px;
@@ -360,4 +371,14 @@ h1.display-4 .custom-orange-text {
 
 .form-container {
     position: relative; /* This allows positioning inside the form */
+}
+
+#contact-form {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.coach-form {
+    max-width: 350px;
+    margin: 0 auto;
 }
