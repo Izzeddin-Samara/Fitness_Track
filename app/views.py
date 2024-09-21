@@ -9,6 +9,7 @@ from datetime import date
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.contrib.auth import authenticate, login as auth_login 
+import os
 
 def index(request):
     all_the_coaches = models.show_all_coaches(request)
@@ -306,11 +307,12 @@ def contact(request):
 
 def add_contact(request):
     if request.method == 'POST':
-        print(request.POST)  # Check the incoming data
+        print(request.POST)  
         contact = models.add_contact(request)
         if contact:
             send_confirmation_email(contact)
-            messages.success(request, f"Your message submitted successfully!", extra_tags='success')
+            send_admin_email(contact)
+            messages.success(request, f"Message sent successfully", extra_tags='success')
             return redirect('/contact')
         else:
             return render(request, 'contact.html', {'error': 'Failed to create contact'})
@@ -318,7 +320,7 @@ def add_contact(request):
 
 def send_confirmation_email(contact):
     subject = 'We Have Received Your Contact Request'
-    from_email = settings.DEFAULT_FROM_EMAIL
+    from_email = os.environ.get('DEFAULT_FROM_EMAIL')
     recipient_list = [contact.email]
 
     email_body = (
@@ -329,7 +331,27 @@ def send_confirmation_email(contact):
         "FitnessTrack Team\n"
     )
 
-    email = EmailMessage(
+    email = EmailMessage (
+        subject=subject,
+        body=email_body,
+        from_email=from_email,
+        to=recipient_list
+    )
+    email.send()
+
+def send_admin_email(contact):
+    subject = 'New Contact Message'
+    from_email = os.environ.get('DEFAULT_FROM_EMAIL')
+    recipient_list = [os.environ.get('DEFAULT_FROM_EMAIL')]
+
+    email_body = (
+        f"New contact request received from {contact.name}.\n\n"
+        f"Email: {contact.email}\n"
+        f"Message: {contact.message}\n\n"
+        "Please follow up with this contact as soon as possible.\n\n"
+    )
+
+    email = EmailMessage (
         subject=subject,
         body=email_body,
         from_email=from_email,
