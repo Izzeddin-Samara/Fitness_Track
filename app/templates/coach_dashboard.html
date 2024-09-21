@@ -98,7 +98,7 @@
                         <i class="fas fa-comments fa-2x mb-2"></i>
                         <h5 class="card-title">Your Recent Reviews</h5>
                         <p class="card-text flex-grow-1">View your recent reviews.</p>
-                        <a href="{% url 'coach_reviews' %}" class="btn btn-primary mt-2" id="orange">View Reviews</a>
+                        <a href="{% url 'coach_reviews' coach.id %}" class="btn btn-primary mt-2" id="orange">View Reviews</a>
                     </div>
                 </div>
             </div>
