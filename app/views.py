@@ -414,18 +414,18 @@ def coach_application(request):
 def coach_profile(request, coach_id):
     coach = models.get_coach(coach_id)
     coach_experiences = models.coach_experience(coach_id)
-    coach_education = models.coach_education(coach_id)  
+    coach_education = models.coach_education(coach_id)
 
     
     is_coach = 'coach_id' in request.session and request.session['coach_id'] == coach_id
 
-    is_logged_in = request.user.is_authenticated or is_coach
-
     
+    is_logged_in = 'userid' in request.session or is_coach
+
     return render(request, 'coach_profile.html', {
         'coach': coach,
         'coach_experiences': coach_experiences,
-        'coach_education': coach_education,  
+        'coach_education': coach_education,
         'is_coach': is_coach,
         'is_logged_in': is_logged_in,
     })
