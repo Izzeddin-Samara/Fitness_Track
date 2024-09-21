@@ -236,7 +236,7 @@ def create_review(request, coach_id):
        
         models.add_review(request)
         messages.success(request, f"Review submitted successfully for coach {coach.first_name} {coach.last_name}", extra_tags='success')
-        return redirect('/recent_reviews')
+        return redirect('/user_reviews')
 
     return render(request, 'review_form.html', {'user': user, 'coach': coach, 'coach_id': coach_id})
 
@@ -252,7 +252,7 @@ def update_review(request, review_id):
     if request.method == 'POST':
         models.update_review(request, review_id)
         messages.success(request, f" Review for coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
-        return redirect('/recent_reviews')
+        return redirect('/user_reviews')
     else:
         return render(request, 'update_review.html', {'review': review, 'coach': coach})
 
@@ -266,7 +266,7 @@ def delete_review(request, review_id):
     models.delete_review(review_id)
     coach = review.coach    
     messages.success(request, f" Review for coach {coach.first_name} {coach.last_name} deleted successfully.", extra_tags='success')
-    return redirect('/recent_reviews', {'review' : review, 'coach' : coach})
+    return redirect('/user_reviews', {'review' : review, 'coach' : coach})
 
 def logout_user(request):
     logout(request)
@@ -288,12 +288,12 @@ def upcoming_sessions(request):
         user_sessions = models.get_sessions_by_user(user_id)
         return render(request, 'upcoming_sessions.html', {'user': user, 'user_sessions': user_sessions})
 
-def recent_reviews(request):
+def user_reviews(request):
     if 'userid' in request.session:
         user_id = request.session['userid']
         user = models.get_user(user_id)
         user_reviews = models.get_reviews_by_user(user_id)
-        return render(request, 'recent_reviews.html', {'user': user, 'user_reviews': user_reviews})
+        return render(request, 'user_reviews.html', {'user': user, 'user_reviews': user_reviews})
 
 def available_coaches(request):
     if 'userid' in request.session:
