@@ -15,26 +15,33 @@
 
     <header class="bg-dark text-white p-3 mb-4">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="/coach_dashboard" class="header-link">
+            <a href="{% if is_coach %}/coach_dashboard{% else %}/{% endif %}" class="header-link">
                 <h1 class="mb-0">
                     <span id="header-fitness">FITNESS</span><span id="header-track">TRACK</span>
                 </h1>
             </a>
 
             <div class="user-info">
+                {% if is_coach or is_logged_in %}
                 <form method="post" action="{% url 'logout_user' %}" class="d-inline">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger" id="log">
                         Logout <i class="fas fa-sign-out-alt"></i>
                     </button>
                 </form>
+                {% endif %}
             </div>
         </div>
     </header>
 
+
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1>Your Recent Reviews</h1>
+            {% if is_coach %}
+            <h2>Your Recent Reviews</h2>
+            {% else %}
+            <h2>Recent Reviews for {{ coach.first_name }} {{ coach.last_name }}</h2>
+            {% endif %}
         </div>
 
         <div class="row">
@@ -43,7 +50,7 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <div class="mb-3">
-                            <h5 class="card-title mb-0"><strong>{{ review.user.first_name }} {{ review.user.last_name }}</strong></h5>
+                            <h5 class="card-title mb-0"><strong>{{ review.user.first_name }} {{ review.user.last_name}}</strong></h5>
                             <small class="text-muted">{{ review.updated_at}}</small>
                         </div>
                         <p class="card-text">{{ review.content }}</p>
