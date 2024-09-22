@@ -528,15 +528,18 @@ def add_education(request, coach_id):
         return redirect('login')
 
     logged_in_coach_id = request.session['coach_id']
-    if logged_in_coach_id != coach_id:
+    if logged_in_coach_id != int(coach_id):  # Ensure types are consistent
         return redirect('coach_profile', coach_id=logged_in_coach_id)
 
     coach = models.get_coach(coach_id)
-    
+
     if request.method == 'POST':
         models.add_education(request)
-        messages.success(request, f"Education Added successfully.", extra_tags='success')
+        messages.success(request, "Education Added successfully.", extra_tags='success')
         return redirect('coach_profile', coach_id=coach_id)
+    else:
+        # Assume there is a form for GET requests to add education
+        return render(request, 'education_form.html', {'coach': coach})
 
 # Handles the update of an existing education entry for the coach.
 # Allows the coach to update their educational qualifications on their profile.
