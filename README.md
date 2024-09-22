@@ -162,7 +162,7 @@ Use Mailjet if you need to send actual emails from the application
 
 - **Real Emails Required:** Mailjet requires valid email addresses for sending notifications. Ensure that you use real email addresses for users, coaches, contact forms, and coach applications to ensure successful delivery.
 
-- **Single Email for All Notifications:** Utilize one email address (e.g., your_email@example.com) for sending all notifications to users, coaches, and via contact forms and coach applications. This simplifies the email setup and ensures compliance with Mailjet’s policy of using verified sender addresses, enhancing deliverability and consistency across your project.
+- **Single Email for All Notifications:** Utilize one email address (e.g., your_email@example.com) for sending all notifications to users, coaches, and via contact forms and coach applications. This simplifies the email setup and ensures compliance with Mailjet’s policy of using verified sender addresses, enhancing deliverability and consistency across the project.
 
 ## 🧪 Setting Up Mailtrap for Simulated Email Sending
 
@@ -195,5 +195,50 @@ Use Mailtrap if you want to simulate the process of sending emails without actua
 ### Choosing the Right Configuration
 - Use **Mailjet** if your goal is to send emails to actual recipients.
 - Opt for **Mailtrap** if you are testing email functionalities and prefer not to send real emails.
+
+## 📘 Usage
+
+This section includes video guides that detail the functionalities of the application. These tutorials are intended to assist users in navigating and utilizing the platform effectively.
+
+### Video Guides
+
+### 🧍 General User Interaction
+- **Description**: Get started with basic functionalities available to all users.
+##### 🎥 User Login and Registration
+- **Description**: Watch how users can easily login and register on the platform.
+- **Link to Video**: [User Login and Registration](https://drive.google.com/file/d/1mP8i_xBf8x3296GwS7nz18Se31KoJ7W5/view?usp=sharing)
+
+##### 🎥 Contact Form
+- **Description**: This guide demonstrates how to use the contact form for suggestions, feedback, or support.
+- **Link to Video**: [Contact Us Form](https://drive.google.com/file/d/14hkvlAU3IW6Bvndmv3xfXCtX6_ZicMAJ/view?usp=sharing)
+
+##### 🎥 Booking Management
+- **Description**: Explore the process for managing bookings, including how to book, update, and cancel them.
+- **Link to Video**: [Booking Management](https://drive.google.com/file/d/1sg0IgHLmc2UcHfsAdbski-luQkJJu_nh/view?usp=sharing)
+
+##### 🎥 Managing Reviews
+- **Description**: Understand how to oversee reviews on the platform, including how to post, update, or delete them.
+- **Link to Video**: [Managing Reviews](https://drive.google.com/file/d/1DNmiO_YIL0DCJlTfJJKnB0NQhmBe-4Zb/view?usp=sharing)
+
+### 🏋️ Coach-Specific Features
+- **Description**: Features and functionalities specific to coaches on the platform.
+##### 🎥 Coach Application
+- **Description**: Learn how prospective coaches can apply to join our team through the application form.
+- **Link to Video**: [Coach Application](https://drive.google.com/file/d/1qAY6GpZfB-8Wj8S3PC2vj0xWxjvMLPaz/view?usp=sharing)
+
+##### 🎥 Coach Login
+- **Description**: Discover how coaches log in and access their recent reviews and upcoming sessions.
+- **Link to Video**: [Coach Login](https://drive.google.com/file/d/1irLxebJy5McTS670IR_vq2ZLfX1DJlic/view?usp=sharing)
+
+##### 🎥 Coach Profile Management
+- **Description**: Learn how coaches can update their profile information effectively.
+- **Link to Video**: [Coach Profile Management](https://drive.google.com/file/d/1nZJO9wsUx_ISMgdaiyylSs28uQ2jiX8a/view?usp=sharing)
+
+### 🛠️ Administrative Functions
+- **Description**: Administrative tools and features for managing the platform.
+##### 🎥 Admin Login and Adding a Coach
+- **Description**: This tutorial covers the administrative functions of logging in and adding a new coach.
+- **Link to Video**: [Admin Login and Adding a Coach](https://drive.google.com/file/d/1hDNXGYA8OKeqjJcpK1TxZUvsaoTzEe6K/view?usp=sharing)
+
 
 
