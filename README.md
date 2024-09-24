@@ -129,72 +129,9 @@ To get started with the FitnessTrack project, follow these steps:
       
       http://127.0.0.1:8000/
 
-## :envelope: Email Setup
+## 📧 Email Setup
 
-This section explains how to configure email functionalities in the FitnessTrack project. You can choose to set up Mailjet for sending real emails or Mailtrap for simulating email sending.
-
-### :gear: Setting Up Mailjet for Real Emails
-
-Use Mailjet if you need to send actual emails from the application
-
-### Steps to Set Up Mailtjet:
-
-1. **Sign Up and Get Your API Keys:**
-   - Sign up for an account at [Mailjet](https://www.mailjet.com).
-   - Navigate to the API section and generate your API keys (API key and Secret key).
-
-2. **Create a `.env` File:**
-   - Ensure you have a `.env` file in the project's root directory (where `manage.py` is located).
-
-3. **Configure Mailjet in the `.env` File:**
-   - Add the following lines to the `.env` file, replacing `your_value_here` with your Mailjet configuration details:
-     ```plaintext
-     EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-     EMAIL_HOST='in-v3.mailjet.com'
-     EMAIL_PORT=587
-     EMAIL_USE_TLS=True
-     EMAIL_HOST_USER='your_mailjet_api_key'  # Replace with your actual Mailjet API key
-     EMAIL_HOST_PASSWORD='your_mailjet_secret_key'  # Replace with your actual Mailjet secret key
-     DEFAULT_FROM_EMAIL='your_email@example.com'  # Replace 'your_email@example.com' with the email address you registered with on Mailjet. This email will appear in the 'From' field when sending emails.
-     ```
-
-### :warning: Important Notes
-
-- **Real Emails Required:** Mailjet requires valid email addresses for sending notifications. Ensure that you use real email addresses for users, coaches, contact forms, and coach applications to ensure successful delivery.
-
-- **Single Email for All Notifications:** Utilize one email address (e.g., your_email@example.com) for sending all notifications to users, coaches, and via contact forms and coach applications. This simplifies the email setup and ensures compliance with Mailjet’s policy of using verified sender addresses, enhancing deliverability and consistency across the project.
-
-## 🧪 Setting Up Mailtrap for Simulated Email Sending
-
-Use Mailtrap if you want to simulate the process of sending emails without actual delivery. This is ideal for testing functionalities without sending real emails.
-
-### Steps to Set Up Mailtrap:
-
-1. **Create a Mailtrap Account:**
-   - Sign up at [Mailtrap](https://mailtrap.io) and log in to your account.
-   - Create an Inbox: Choose 'Email Testing', then create and configure a new inbox to receive simulated emails.
-   - Obtain Credentials: After creating your inbox, locate the SMTP settings for the inbox which include the username and password. You'll need these for configuring your project's email settings.
-
-2. **Add Mailtrap Settings to the `.env` File:**
-   - Include the following settings in your `.env` file to configure Mailtrap for simulating emails:
-     ```plaintext
-     EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-     EMAIL_HOST='smtp.mailtrap.io'
-     EMAIL_PORT=2525
-     EMAIL_USE_TLS=True
-     EMAIL_HOST_USER='your_mailtrap_username'  # Replace with your Mailtrap username
-     EMAIL_HOST_PASSWORD='your_mailtrap_password'  # Replace with your Mailtrap password
-     DEFAULT_FROM_EMAIL='your_test_email@example.com'  # Use this email for simulation purposes.
-     ```
-
-3. **Using Fake Emails for Testing:**
-- Utilize fake email addresses for testing interactions with users, coaches, contact forms, and coach application forms. This ensures that all test emails are safely routed to your Mailtrap inbox. This setup allows you to review and validate email functionalities thoroughly without sending emails to real addresses.
-
-### Note:
-- By directing all test emails to your Mailtrap inbox, you can ensure the integrity of your testing process and protect real email addresses from receiving test data.
-### Choosing the Right Configuration
-- Use **Mailjet** if your goal is to send emails to actual recipients.
-- Opt for **Mailtrap** if you are testing email functionalities and prefer not to send real emails.
+For detailed instructions on setting up email notifications in FitnessTrack, please refer to the [Email Setup Guide](https://github.com/Izzeddin-Samara/Fitness_Track/wiki/Email-Setup).
 
 ## 📘 Usage
 
