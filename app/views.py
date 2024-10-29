@@ -368,19 +368,26 @@ def contact(request):
     return render(request, 'contact.html')
 
 # Handles the submission of the contact form.
-# Sends a confirmation email to the user and an alert email to the admin.
+# Sends a confirmation email to the user and an alert email to the admin if email settings are configured.
+# If email settings are missing, a warning message is displayed, and the contact message is processed without sending emails.
 def add_contact(request):
     if request.method == 'POST':
         print(request.POST)  
         contact = models.add_contact(request)
+        
         if contact:
-            send_confirmation_email(contact)
-            send_admin_email(contact)
-            messages.success(request, f"Message sent successfully", extra_tags='success')
+            if is_email_configured():
+                send_confirmation_email(contact)
+                send_admin_email(contact)
+                messages.success(request, "Message sent successfully. A confirmation email has been sent.", extra_tags='success')
+            else:
+                messages.warning(request, "Message sent successfully. However, we couldn’t send a confirmation email due to missing email settings.")
             return redirect('/contact')
         else:
             return render(request, 'contact.html', {'error': 'Failed to create contact'})
+    
     return render(request, 'contact.html')
+
 
 # Sends a confirmation email to the user after submitting the contact form.
 def send_confirmation_email(contact):
