@@ -135,10 +135,12 @@ def is_email_configured():
     return all(required_settings)
 
 # Handles the creation of a new session.
-# Allows users to book a session with a specific coach and sends email notifications.
+# Allows users to book a session with a specific coach and sends email notifications if email settings are configured.
+# If email settings are missing, a warning message is displayed, and the session is created without sending emails.
 def create_session(request, coach_id):
     if 'userid' not in request.session:
         return redirect('login')
+
     user_id = request.session['userid']
     user = models.get_user(user_id)
     min_date = date.today().isoformat()
@@ -147,22 +149,28 @@ def create_session(request, coach_id):
     if request.method == 'POST':
         request.session['coachid'] = coach_id
         session = models.create_session(request)
-        send_mail(
-            'Session Created Successfully',
-            f'Your session with coach {coach.first_name} {coach.last_name} on {session.date} at {session.duration} has been successfully booked.',
-            os.environ.get('DEFAULT_FROM_EMAIL'),  
-            [session.user.email], 
-            fail_silently=False,
-        )
 
-        send_mail(
-            'New Session Booked',
-            f'A new session has been booked by {user.first_name} {user.last_name} on {session.date} at {session.duration}. Please check your dashboard for more details.',
-            os.environ.get('DEFAULT_FROM_EMAIL'),
-            [session.coach.email], 
-            fail_silently=False,
-        )
-        messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} booked successfully, session details have been sent to your email", extra_tags='success')
+        if session:
+             if is_email_configured():
+                send_mail(
+                'Session Created Successfully',
+                f'Your session with coach {coach.first_name} {coach.last_name} on {session.date} at {session.duration} has been successfully booked.',
+                os.environ.get('DEFAULT_FROM_EMAIL'),
+                [session.user.email],
+                fail_silently=False,
+                )
+
+                send_mail(
+                'New Session Booked',
+                f'A new session has been booked by {user.first_name} {user.last_name} on {session.date} at {session.duration}. Please check your dashboard for more details.',
+                os.environ.get('DEFAULT_FROM_EMAIL'),
+                [session.coach.email],
+                fail_silently=False,
+                )
+                messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} booked successfully. Session details have been sent to your email.", extra_tags='success')
+             else:
+                  messages.warning(request, f"Session booked successfully with coach {coach.first_name} {coach.last_name}. However, we couldn’t send a confirmation email due to missing email settings.")
+
         return redirect('/user_sessions')
 
     return render(request, 'session_form.html', {'user': user, 'coach': coach, 'coach_id': coach_id, 'min_date': min_date})
