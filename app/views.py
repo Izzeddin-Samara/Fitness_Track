@@ -176,40 +176,47 @@ def create_session(request, coach_id):
     return render(request, 'session_form.html', {'user': user, 'coach': coach, 'coach_id': coach_id, 'min_date': min_date})
 
 # Handles the update of an existing session.
-# Allows users to update session details and sends email notifications.
+# Allows users to update session details and sends email notifications if email settings are configured.
+# If email settings are missing, a warning message is displayed, and the session is updated without sending emails.
 def update_session(request, session_id):
     if 'userid' not in request.session:
         return redirect('login')
+
     user_id = request.session['userid']
     user = models.get_user(user_id)
     min_date = date.today().isoformat()
     session = models.get_session(session_id)
-    coach = session.coach 
+    coach = session.coach
 
     if request.method == 'POST':
         models.update_session(request, session_id)
 
-        session.refresh_from_db()
-        
-        send_mail(
-            'Session Updated Successfully',
-            f'Your session with coach {coach.first_name} {coach.last_name} has been updated to be on {session.date} at {session.duration} at {session.place}.',
-            os.environ.get('DEFAULT_FROM_EMAIL'),
-            [session.user.email],
-            fail_silently=False,
-        )
+        if is_email_configured():
+            session.refresh_from_db()
+            send_mail(
+                'Session Updated Successfully',
+                f'Your session with coach {coach.first_name} {coach.last_name} has been updated to be on {session.date} at {session.duration} at {session.place}.',
+                os.environ.get('DEFAULT_FROM_EMAIL'),
+                [session.user.email],
+                fail_silently=False,
+            )
 
-        send_mail(
-            'Session Updated',
-            f'The session booked by {user.first_name} {user.last_name} has been updated to be on {session.date} at {session.duration} at {session.place}. Please check your dashboard for more details.',
-            os.environ.get('DEFAULT_FROM_EMAIL'),
-            [session.coach.email],
-            fail_silently=False,
-        )
-        messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
+            send_mail(
+                'Session Updated',
+                f'The session booked by {user.first_name} {user.last_name} has been updated to be on {session.date} at {session.duration} at {session.place}. Please check your dashboard for more details.',
+                os.environ.get('DEFAULT_FROM_EMAIL'),
+                [session.coach.email],
+                fail_silently=False,
+            )
+
+            messages.success(request, f"Session with coach {coach.first_name} {coach.last_name} updated successfully.", extra_tags='info')
+        else:
+            messages.warning(request, f"Session with coach {coach.first_name} {coach.last_name} updated successfully. However, we couldn’t send an update confirmation email due to missing email settings.")
+        
         return redirect('/user_sessions')
-    else:
-        return render(request, 'update_session.html', {'user': user, 'session': session, 'coach': coach, 'min_date': min_date})
+
+    return render(request, 'update_session.html', {'user': user, 'session': session, 'coach': coach, 'min_date': min_date})
+
 
 # Handles the cancellation of a session.
 # Deletes the session and sends email notifications to the user and coach.
