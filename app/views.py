@@ -124,6 +124,16 @@ def coach_reviews(request, coach_id):
         'is_coach': is_coach,
     })
 
+# Checks if the required email settings are configured in environment variables.
+# Returns True if all required settings are available, else False.
+def is_email_configured():
+    required_settings = [
+        os.environ.get('DEFAULT_FROM_EMAIL'),
+        os.environ.get('EMAIL_HOST_USER'),
+        os.environ.get('EMAIL_HOST_PASSWORD'),
+    ]
+    return all(required_settings)
+
 # Handles the creation of a new session.
 # Allows users to book a session with a specific coach and sends email notifications.
 def create_session(request, coach_id):
