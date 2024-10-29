@@ -219,7 +219,8 @@ def update_session(request, session_id):
 
 
 # Handles the cancellation of a session.
-# Deletes the session and sends email notifications to the user and coach.
+# Cancel the session and sends email notifications to the user and coach if email settings are configured.
+# If email settings are missing, a warning message is displayed, and the session is canceled without sending emails.
 def cancel_session(request, session_id):
     if 'userid' not in request.session:
         return redirect('login')
@@ -231,27 +232,33 @@ def cancel_session(request, session_id):
 
     models.delete_session(session_id)
 
-    send_mail(
-        'Session Deleted Successfully',
-        f'Your session with coach {coach.first_name} {coach.last_name} on {session.date} at {session.duration} has been successfully cancelled.',
-        os.environ.get('DEFAULT_FROM_EMAIL'),
-        [session.user.email],
-        fail_silently=False,
-    )
+    if is_email_configured():
+        send_mail(
+            'Session Cancelled Successfully',
+            f'Your session with coach {coach.first_name} {coach.last_name} on {session.date} at {session.duration} has been successfully cancelled.',
+            os.environ.get('DEFAULT_FROM_EMAIL'),
+            [session.user.email],
+            fail_silently=False,
+        )
 
-    send_mail(
-        'Session Cancelled',
-        f'The session booked by {user.first_name} {user.last_name} on {session.date} at {session.duration} has been cancelled.',
-        os.environ.get('DEFAULT_FROM_EMAIL'),
-        [session.coach.email],
-        fail_silently=False,
-    )
+        send_mail(
+            'Session Cancelled',
+            f'The session booked by {user.first_name} {user.last_name} on {session.date} at {session.duration} has been cancelled.',
+            os.environ.get('DEFAULT_FROM_EMAIL'),
+            [session.coach.email],
+            fail_silently=False,
+        )
 
-    messages.success(
-        request,
-        f"Session with coach {coach.first_name} {coach.last_name} cancelled successfully",
-        extra_tags='success'
-    )
+        messages.success(
+            request,
+            f"Session with coach {coach.first_name} {coach.last_name} cancelled successfully. Notification email has been sent.",
+            extra_tags='success'
+        )
+    else:
+        messages.warning(
+            request,
+            f"Session with coach {coach.first_name} {coach.last_name} cancelled successfully. However, we couldn’t send a confirmation email due to missing email settings."
+        )
 
     return redirect('/user_sessions')
 
