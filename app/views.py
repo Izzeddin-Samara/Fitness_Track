@@ -456,7 +456,21 @@ def coach_application(request):
                 from_email=os.environ.get('DEFAULT_FROM_EMAIL'),
                 to=[os.environ.get('DEFAULT_FROM_EMAIL')],
             )
-            admin_email.send()
+
+            
+            skipped_files = []
+            for file_key, file in request.FILES.items():
+                if file.size <= MAX_FILE_SIZE and file.content_type in ALLOWED_FILE_TYPES:
+                    file.seek(0)
+                    file_content = file.read()
+                    if file_content:
+                        admin_email.attach(file.name, file_content, file.content_type)
+                else:
+                    skipped_files.append(file.name)
+
+            
+            if admin_email.attachments:
+                admin_email.send()
 
             applicant_email = EmailMessage(
                 subject='Your Coach Application Has Been Submitted',
