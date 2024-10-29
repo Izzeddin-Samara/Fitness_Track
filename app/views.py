@@ -442,45 +442,36 @@ ALLOWED_FILE_TYPES = [
 ]
 
 # Handles the coach application process.
-# Validates and processes the application form, then sends notification emails to the admin and the applicant.
+# Validates and processes the application form, then sends notification emails to the admin and the applicant if email settings are configured.
+# If email settings are missing, a warning message is displayed, and the application is processed without sending emails.
 def coach_application(request):
     if request.method == 'POST':
         application = models.submit_application(request.POST, request.FILES)
+        email_warning = not is_email_configured()
 
-        admin_email = EmailMessage(
-            subject='New Coach Application Received',
-            body=f"New coach application submitted by {request.POST.get('first_name')} {request.POST.get('last_name')}. Please find the attached documents.",
-            from_email=os.environ.get('DEFAULT_FROM_EMAIL'),  
-            to=[os.environ.get('DEFAULT_FROM_EMAIL')],  
-        )
-
-        skipped_files = []
-        for file_key, file in request.FILES.items():
-            if file.size > MAX_FILE_SIZE or file.content_type not in ALLOWED_FILE_TYPES:
-                skipped_files.append(file.name)
-                continue
-
-            file.seek(0)
-            file_content = file.read()
-            if file_content:
-                admin_email.attach(file.name, file_content, file.content_type)
-
-        if admin_email.attachments:
+        if not email_warning:
+            admin_email = EmailMessage(
+                subject='New Coach Application Received',
+                body=f"New coach application submitted by {request.POST.get('first_name')} {request.POST.get('last_name')}. Please find the attached documents.",
+                from_email=os.environ.get('DEFAULT_FROM_EMAIL'),
+                to=[os.environ.get('DEFAULT_FROM_EMAIL')],
+            )
             admin_email.send()
 
-        applicant_email = EmailMessage(
-            subject='Your Coach Application Has Been Submitted',
-            body=f"Dear {request.POST.get('first_name')},\n\nThank you for submitting your application as a coach. We have received your application and will review it soon.\n\nBest regards,\nFitnessTrack Team",
-            from_email=os.environ.get('DEFAULT_FROM_EMAIL'),
-            to=[request.POST.get('email')],
-        )
+            applicant_email = EmailMessage(
+                subject='Your Coach Application Has Been Submitted',
+                body=f"Dear {request.POST.get('first_name')},\n\nThank you for submitting your application as a coach. We have received your application and will review it soon.\n\nBest regards,\nFitnessTrack Team",
+                from_email=os.environ.get('DEFAULT_FROM_EMAIL'),
+                to=[request.POST.get('email')],
+            )
+            applicant_email.send()
+            messages.success(request, "Application submitted successfully. Notification emails have been sent.")
+        else:
+            messages.warning(request, "Application submitted successfully. However, we couldn’t send notification emails due to missing email settings.")
 
-        applicant_email.send()
+        return redirect('coach_application') 
 
-        return render(request, 'application_submitted.html', {'application': application})
-
-    else:
-        return render(request, 'coach_application.html')
+    return render(request, 'coach_application.html')
 
 # Renders the coach profile page.
 # Displays the coach's information, experiences, and education.
