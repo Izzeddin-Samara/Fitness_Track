@@ -27,6 +27,18 @@
 
     <!-- Content Container -->
     <div class="container">
+        {% if messages %}
+        <div class="form-alert">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         <div class="card shadow-sm mb-4">
             <div class="row no-gutters">
 
@@ -42,31 +54,41 @@
                     <div>
                         <h4 class="card-title text-orange">Become a Part of Our Elite Coaching Team!</h4>
                         <hr class="border-secondary">
-                        <p class="card-text text-black">At Fitness Track, we believe in empowering individuals to reach their fullest potential. As a coach, you'll have the opportunity to inspire, motivate, and guide our community to achieve their fitness goals. If you're passionate about fitness and love making a difference, we want to hear from you!</p>
+                        <p class="card-text text-black">At Fitness Track, we believe in empowering individuals to reach
+                            their fullest potential. As a coach, you'll have the opportunity to inspire, motivate, and
+                            guide our community to achieve their fitness goals. If you're passionate about fitness and
+                            love making a difference, we want to hear from you!</p>
                         <hr class="border-secondary">
-                        <p class="card-text font-weight-bold text-black">Your journey to impact starts here. Apply now and help shape the future of fitness!</p>
+                        <p class="card-text font-weight-bold text-black">Your journey to impact starts here. Apply now
+                            and help shape the future of fitness!</p>
                     </div>
 
                     <!-- Bottom Space: Testimonials and Social Media Links -->
                     <div class="mt-4">
                         <!-- Testimonials Section -->
-                        <div id="testimonialCarousel" class="carousel slide" data-ride="carousel" data-interval="5000" data-pause="false">
+                        <div id="testimonialCarousel" class="carousel slide" data-ride="carousel" data-interval="5000"
+                            data-pause="false">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <p class="card-text text-black"><i>"Joining Fitness Track was the best decision I made as a coach!"</i> - Sarah Johnson, Coach</p>
+                                    <p class="card-text text-black"><i>"Joining Fitness Track was the best decision I
+                                            made as a coach!"</i> - Sarah Johnson, Coach</p>
                                 </div>
                                 <div class="carousel-item">
-                                    <p class="card-text text-black"><i>"Being part of this team has been incredibly rewarding and inspiring."</i> - Mark Twain, Coach</p>
+                                    <p class="card-text text-black"><i>"Being part of this team has been incredibly
+                                            rewarding and inspiring."</i> - Mark Twain, Coach</p>
                                 </div>
                                 <div class="carousel-item">
-                                    <p class="card-text text-black"><i>"FitnessTrack offers an amazing platform to help others achieve their fitness goals."</i> - Ahmad Ibrahim, Coach</p>
+                                    <p class="card-text text-black"><i>"FitnessTrack offers an amazing platform to help
+                                            others achieve their fitness goals."</i> - Ahmad Ibrahim, Coach</p>
                                 </div>
                             </div>
-                            <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
+                            <a class="carousel-control-prev" href="#testimonialCarousel" role="button"
+                                data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
+                            <a class="carousel-control-next" href="#testimonialCarousel" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -78,7 +100,7 @@
                 <!-- Application Form -->
                 <div class="col-md-6 p-4">
                     <h2 class="card-title text-center text-orange mb-4">Coach Application Form</h2>
-                    <form action="/coach_application" method="post" enctype="multipart/form-data" class="coach-form">
+                    <form action="/coach_application/" method="post" enctype="multipart/form-data" class="coach-form">
                         {% csrf_token %}
 
                         <!-- First Name and Last Name -->
@@ -114,7 +136,8 @@
                         <!-- Certificates  -->
                         <div class="form-group mb-2">
                             <label for="certificates"><i class="fas fa-file-pdf"></i> Certificates (PDF only):</label>
-                            <input type="file" class="form-control-file" id="certificates" name="certificates" accept=".pdf" required>
+                            <input type="file" class="form-control-file" id="certificates" name="certificates"
+                                accept=".pdf" required>
                         </div>
 
                         <!-- CV -->
