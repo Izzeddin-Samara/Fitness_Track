@@ -155,7 +155,7 @@ JAZZMIN_SETTINGS = {
     "login_logo_dark": None,  
     "site_icon": "assets/media/logo.png",  
     "welcome_sign": "Welcome to FitnessTrack Admin",
-    "search_model": ["auth.User", "myapp.app"],
+    "search_model": "auth.User",
     "user_avatar": None,
     "topmenu_links": [
         {"name": "Home", "url": "/", "permissions": ["auth.view_user"]},
