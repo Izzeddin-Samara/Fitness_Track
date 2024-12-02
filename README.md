@@ -51,7 +51,7 @@ For detailed installation instructions, please visit the [Installation Guide](ht
 
 ## 📧 Email Setup
 
-For detailed instructions on setting up email notifications in FitnessTrack, please refer to the [Email Setup Guide](https://github.com/Izzeddin-Samara/Fitness_Track/wiki/Email-Setup).
+For detailed instructions on setting up email notifications in FitnessTrack, please refer to the [Email Setup Guide](https://github.com/Izzeddin-Samara/Fitness_Track/wiki/Email-Setup-for-FitnessTrack).
 
 ## 📘 Usage
 
