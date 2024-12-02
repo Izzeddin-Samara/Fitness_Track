@@ -35,7 +35,7 @@ class User(models.Model):
 class Coach(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
     bio = models.TextField()
     image = models.ImageField(upload_to='images/')
