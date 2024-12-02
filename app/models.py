@@ -46,7 +46,7 @@ class CoachApplication(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15)
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     address = models.CharField(max_length=255)
     cv = models.FileField(upload_to='cvs/')
     certificates = models.FileField(upload_to='certificates/')
